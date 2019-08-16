@@ -15,11 +15,16 @@ Thoth's recommendations.
 Configuration options
 =====================
 
+Configuration options for Thoth's s2i image:
+
 * ``THOTH_ADVISE`` - always use the recommended stack by Thoth (even if ``Pipfile.lock`` is present in the repo)
 * ``THOTH_ASSEMBLE_DEBUG`` - run s2i's assemble script in verbose mode
 * ``THOTH_DRY_RUN`` - submit stack to Thoth's recommendation engine but do not use the recommended ``Pipfile.lock`` file, use the ``Pipfile.lock`` file present in the repo instead
 * ``THOTH_FROM_MASTER`` - Use Thamos from git instead of a PyPI release - handy if the released Thamos has a bug which was fixed in the master branch
 * ``THOTH_HOST`` - Thoth's host to reach out to for recommendations (defaults to prod deployment at khemenu.thoth-station.ninja)
+
+See also configuration options for Thoth's client present in `Thamos repository
+<https://github.com/thoth-station/thamos/#using-thoth-and-thamos-in-openshifts-s2i>`_.
 
 Building container images
 =========================
