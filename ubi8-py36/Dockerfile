@@ -8,10 +8,12 @@ COPY ./thoth_assemble /tmp/thoth_assemble
 
 USER 0
 RUN TMPFILE=`mktemp` && \
+    TMPFILE_ASSEMBLE=`mktemp` && \
+    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
     head -n1 "${TMPFILE}" > "${STI_SCRIPTS_PATH}/assemble" && \
-    cat /tmp/thoth_assemble >> "${STI_SCRIPTS_PATH}/assemble" && \
+    cat "${TMPFILE_ASSEMBLE}" >> "${STI_SCRIPTS_PATH}/assemble" && \
     tail -n+2 "${TMPFILE}" >> "${STI_SCRIPTS_PATH}/assemble" && \
-    rm "${TMPFILE}"
+    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}"
 
 USER 1001
