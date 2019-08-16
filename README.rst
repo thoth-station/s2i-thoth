@@ -24,15 +24,4 @@ Configuration options
 Building container images
 =========================
 
-To build container images, simply do:
-
-.. code-block:: console
-
-  ./build_all.sh
-
-If you wish to push built container images to quay.io:
-
-
-.. code-block:: console
-
-  BUILD_AND_PUSH=1 ./build_all.sh
+Container images are automatically built in quay.io when pushed to master branch.
