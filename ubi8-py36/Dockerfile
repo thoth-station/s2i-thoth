@@ -4,8 +4,6 @@ FROM registry.access.redhat.com/ubi8/python-36
 LABEL ninja.thoth-station.version="0.0.1" \
       maintainer="Fridolin Pokorny <fridolin@redhat.com>"
 
-COPY ./thoth_assemble /tmp/thoth_assemble
-
 USER 0
 RUN TMPFILE=`mktemp` && \
     TMPFILE_ASSEMBLE=`mktemp` && \
