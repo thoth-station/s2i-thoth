@@ -30,3 +30,11 @@ Building container images
 =========================
 
 Container images are automatically built in quay.io when pushed to master branch.
+
+Importing image into OpenShift's registry
+=========================================
+
+.. code-block:: console
+
+  oc import-image quay.io/thoth-station/s2i-thoth-ubi8-py36 -n <your-namespace>
+
