@@ -43,6 +43,8 @@ pushd /tmp/src
   else
       thamos advise --no-wait
   fi
+} || {
+  echo "Thoth advises are not activated"
 }
 
 # Restore previous Pipfile.lock, do not use the original one on dry run.
