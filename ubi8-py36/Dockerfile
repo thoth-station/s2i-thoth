@@ -15,6 +15,8 @@ RUN TMPFILE=`mktemp` && \
     head -n1 "${TMPFILE}" > "${STI_SCRIPTS_PATH}/assemble" && \
     cat "${TMPFILE_ASSEMBLE}" >> "${STI_SCRIPTS_PATH}/assemble" && \
     tail -n+2 "${TMPFILE}" >> "${STI_SCRIPTS_PATH}/assemble" && \
-    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch
+    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch && \
+    chown -R 1001:0 ${APP_ROOT} && \
+    fix-permissions ${APP_ROOT} -P
 
 USER 1001
