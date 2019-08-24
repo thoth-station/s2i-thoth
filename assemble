@@ -2,6 +2,7 @@
 #
 # ------------------------>% Thoth related content %<------------------------
 #
+THOTH_ASSEMBLE_DEBUG=${THOTH_ASSEMBLE_DEBUG:-0}
 [[ ${THOTH_ASSEMBLE_DEBUG} -eq 0 ]] || set -e
 
 # Submit stack to Thoth, but do not use the recommended one:
@@ -50,7 +51,7 @@ pushd /tmp/src
 # Restore previous Pipfile.lock, do not use the original one on dry run.
 [[ ${THOTH_DRY_RUN} -ne 0 ]] && {
     echo "Restoring previous Pipfile.lock as THOTH_DRY_RUN was set" >&2
-    cat Pipfile.lock || true
+    [[ ${THOTH_ASSEMBLE_DEBUG} -ne 0 ]] && cat Pipfile.lock || true
     [[ -f ../Pipfile.lock ]] && cp ../Pipfile.lock .
 }
 
