@@ -2,7 +2,7 @@
 FROM registry.access.redhat.com/ubi8/python-36
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
-    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
+    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv."
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
