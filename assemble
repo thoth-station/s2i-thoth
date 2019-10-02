@@ -25,22 +25,22 @@ pushd /tmp/src
 [[ ( -f Pipfile && ! -f Pipfile.lock ) || ${THOTH_ADVISE} -ne 0 ]] && {
   echo "Updating pip and installing Thamos..."
   # Enable pip3.
-  pip install --upgrade pip
+  pip install --upgrade pip || exit 1
 
   if [[ ${THOTH_FROM_MASTER} -eq 1 ]]; then
-      pip3 install git+https://github.com/thoth-station/thamos
-      pip3 install git+https://github.com/thoth-station/invectio
+      pip3 install git+https://github.com/thoth-station/thamos || exit 1
+      pip3 install git+https://github.com/thoth-station/invectio || exit 1
   else
-      pip3 install thamos
+      pip3 install thamos || exit 1
   fi
 
   echo ">>> Performing hardware and software discovery..."
-  thamos config --no-interactive
+  thamos config --no-interactive || exit 1
   echo ">>> Thoth's configuration file after hardware and software discovery:"
   cat .thoth.yaml
   echo ">>> Asking Thoth for advise..."
   if [[ ${THOTH_DRY_RUN} -ne 0 ]]; then
-      thamos advise
+      thamos advise || exit 1
   else
       thamos advise --no-wait
   fi
