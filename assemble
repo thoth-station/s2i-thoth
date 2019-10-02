@@ -42,7 +42,7 @@ pushd /tmp/src
   if [[ ${THOTH_DRY_RUN} -ne 0 ]]; then
       thamos advise || exit 1
   else
-      thamos advise --no-wait
+      thamos advise --no-wait || exit 1
   fi
 } || {
   echo "Thoth advises are not activated"
