@@ -22,6 +22,7 @@ Configuration options for Thoth's s2i image:
 * ``THOTH_DRY_RUN`` - submit stack to Thoth's recommendation engine but do not use the recommended ``Pipfile.lock`` file, use the ``Pipfile.lock`` file present in the repo instead
 * ``THOTH_FROM_MASTER`` - Use Thamos from git instead of a PyPI release - handy if the released Thamos has a bug which was fixed in the master branch
 * ``THOTH_HOST`` - Thoth's host to reach out to for recommendations (defaults to prod deployment at khemenu.thoth-station.ninja)
+* ``THOTH_ERROR_FALLBACK`` - fallback to the ``Pipfile.lock`` present in the repository if the submitted Thoth analysis fails
 
 See also configuration options for Thoth's client present in `Thamos repository
 <https://github.com/thoth-station/thamos/#using-thoth-and-thamos-in-openshifts-s2i>`_.
