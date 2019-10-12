@@ -15,12 +15,18 @@ THOTH_FROM_MASTER=${THOTH_FROM_MASTER:-0}
 THOTH_HOST=${THOTH_HOST:-khemenu.thoth-station.ninja}
 # Disable progressbar for thamos:
 THAMOS_NO_PROGRESSBAR=${THAMOS_NO_PROGRESSBAR:-1}
+# Fallback to Pipfile.lock present in the repo if analysis fails.
+THOTH_ERROR_FALLBACK=${THOTH_ERROR_FALLBACK:-0}
 
 # A directory where s2i places sources.
 pushd /tmp/src
 
 # Make a backup of the Pipfile.lock present in the git root.
 [[ ${THOTH_DRY_RUN} -ne 0 && -f Pipfile.lock ]] && cp Pipfile.lock ../
+
+function restore_pipfile_lock() {
+  [[ -f ../Pipfile.lock ]] && cp ../Pipfile.lock .
+}
 
 [[ ( -f Pipfile && ! -f Pipfile.lock ) || ${THOTH_ADVISE} -ne 0 ]] && {
   echo "Updating pip and installing Thamos..."
@@ -40,9 +46,19 @@ pushd /tmp/src
   cat .thoth.yaml
   echo ">>> Asking Thoth for advise..."
   if [[ ${THOTH_DRY_RUN} -ne 0 ]]; then
-      thamos advise || exit 1
+    thamos advise || {
+      if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
+        echo "Thoth stack analysis failed, restoring previous Pipfile.lock"
+        restore_pipfile_lock
+      else
+        echo "Thoth stack analysis failed, this build will fail shortly..." >&2
+        exit 1
+      fi
+    }
   else
-      thamos advise --no-wait || exit 1
+    thamos advise --no-wait || {
+      [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
+    }
   fi
 } || {
   echo "Thoth advises are not activated"
@@ -50,10 +66,12 @@ pushd /tmp/src
 
 # Restore previous Pipfile.lock, do not use the original one on dry run.
 [[ ${THOTH_DRY_RUN} -ne 0 ]] && {
-    echo "Restoring previous Pipfile.lock as THOTH_DRY_RUN was set" >&2
-    [[ ${THOTH_ASSEMBLE_DEBUG} -ne 0 ]] && cat Pipfile.lock || true
-    [[ -f ../Pipfile.lock ]] && cp ../Pipfile.lock .
+  echo "Restoring previous Pipfile.lock as THOTH_DRY_RUN was set" >&2
+  restore_pipfile_lock
 }
+
+# Show Pipfile.lock on debug.
+[[ ${THOTH_ASSEMBLE_DEBUG} -ne 0 ]] && cat Pipfile.lock
 
 popd
 
