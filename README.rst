@@ -1,6 +1,8 @@
 s2i-thoth
 ---------
 
+[![Docker Repository on Quay](https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status "Docker Repository on Quay")](https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36)
+
 Experimental Thoth container images:
 
 * `quay.io/thoth-station/s2i-thoth-ubi8-py36 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36>`_
@@ -38,4 +40,3 @@ Importing image into OpenShift's registry
 .. code-block:: console
 
   oc import-image quay.io/thoth-station/s2i-thoth-ubi8-py36 -n <your-namespace>
-
