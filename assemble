@@ -12,9 +12,9 @@ THOTH_ADVISE=${THOTH_ADVISE:-1}
 # Use Thamos from git instead of a PyPI release:
 THOTH_FROM_MASTER=${THOTH_FROM_MASTER:-0}
 # Thoth host to submit recommendations to:
-THOTH_HOST=${THOTH_HOST:-khemenu.thoth-station.ninja}
+export THOTH_HOST=${THOTH_HOST:-khemenu.thoth-station.ninja}
 # Disable progressbar for thamos:
-THAMOS_NO_PROGRESSBAR=${THAMOS_NO_PROGRESSBAR:-1}
+export THAMOS_NO_PROGRESSBAR=${THAMOS_NO_PROGRESSBAR:-1}
 # Fallback to Pipfile.lock present in the repo if analysis fails.
 THOTH_ERROR_FALLBACK=${THOTH_ERROR_FALLBACK:-0}
 
