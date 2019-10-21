@@ -1,7 +1,10 @@
 s2i-thoth
 ---------
 
-[![Docker Repository on Quay](https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status "Docker Repository on Quay")](https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36)
+|Docker Repository on Quay|
+
+.. |Docker Repository on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status
+   :target: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36
 
 Experimental Thoth container images:
 
