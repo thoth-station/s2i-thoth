@@ -10,11 +10,11 @@ LABEL summary="$SUMMARY" \
       io.k8s.display-name="Thoth Python 3.6-ubi8 S2I" \
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="python,python36" \
-      name="thoth-station/s2i-thoth-ubi8-py36:v0.3.0" \
+      name="thoth-station/s2i-thoth-ubi8-py36:v0.4.0" \
       vendor="AICoE at the Office of the CTO, Red Hat Inc." \
-      version="0.3.0" \
+      version="0.4.0" \
       release="0" \
-      ninja.thoth-station.version="0.1.0" \
+      ninja.thoth-station.version="0.6.0-dev" \
       maintainer="Thoth Station <aicoe-thoth@redhat.com>"
 
 USER 0

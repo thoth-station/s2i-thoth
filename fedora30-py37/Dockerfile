@@ -15,7 +15,7 @@ LABEL summary="$SUMMARY" \
       authoritative-source-url=quay.io \
       version="0.1.0" \
       release="0" \
-      ninja.thoth-station.version="0.1.0" \
+      ninja.thoth-station.version="0.6.0-dev" \
       maintainer="Thoth Station <aicoe-thoth@redhat.com>"
 
 USER 0
