@@ -21,6 +21,17 @@ THOTH_ERROR_FALLBACK=${THOTH_ERROR_FALLBACK:-0}
 # A directory where s2i places sources.
 pushd /tmp/src
 
+echo "Configuration for Thoth"
+echo "=========================="
+echo "THOTH_ASSEMBLE_DEBUG:    ${THOTH_ASSEMBLE_DEBUG}"
+echo "THOTH_DRY_RUN:           ${THOTH_DRY_RUN}"
+echo "THOTH_ADVISE:            ${THOTH_ADVISE}"
+echo "THOTH_FROM_MASTER:       ${THOTH_FROM_MASTER}"
+echo "THOTH_HOST:              ${THOTH_HOST}"
+echo "THAMOS_NO_PROGRESSBAR:   ${THAMOS_NO_PROGRESSBAR}"
+echo "THOTH_ERROR_FALLBACK:    ${THOTH_ERROR_FALLBACK}"
+echo "=========================="
+
 # Make a backup of the Pipfile.lock present in the git root.
 [[ ${THOTH_DRY_RUN} -ne 0 && -f Pipfile.lock ]] && cp Pipfile.lock ../
 
