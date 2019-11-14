@@ -45,7 +45,7 @@ function restore_pipfile_lock() {
   echo ">>> Thoth's configuration file after hardware and software discovery:"
   cat .thoth.yaml
   echo ">>> Asking Thoth for advise..."
-  if [[ ${THOTH_DRY_RUN} -ne 0 ]]; then
+  if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos advise || {
       if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
         echo "Thoth stack analysis failed, restoring previous Pipfile.lock"
