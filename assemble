@@ -48,7 +48,9 @@ function restore_pipfile_lock() {
   if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos advise || {
       if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
-        echo "Thoth stack analysis failed, restoring previous Pipfile.lock"
+        echo "Thoth stack analysis failed with the following log:"
+        thamos log
+        echo "Restoring previous Pipfile.lock"
         restore_pipfile_lock
       else
         echo "Thoth stack analysis failed, this build will fail shortly..." >&2
