@@ -1,14 +1,17 @@
 s2i-thoth
 ---------
 
-|Docker Repository on Quay|
-
-.. |Docker Repository on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status
-   :target: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36
-
 Experimental Thoth container images:
 
 * `quay.io/thoth-station/s2i-thoth-ubi8-py36 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36>`_
+
+  .. |s2i-thoth-ubi8-py36 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status
+     :target: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36
+
+* `quay.io/thoth-station/s2i-thoth-fedora31-py37 <https://quay.io/repository/thoth-station/s2i-thoth-fedora31-py37>`_
+
+  .. |s2i-thoth-fedora31-py37 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-fedora31-py37/status
+     :target: https://quay.io/repository/thoth-station/s2i-thoth-f31-py37
 
 Artifacts needed to build `s2i-thoth-*` container images.
 
@@ -43,3 +46,4 @@ Importing image into OpenShift's registry
 .. code-block:: console
 
   oc import-image quay.io/thoth-station/s2i-thoth-ubi8-py36 -n <your-namespace>
+  oc import-image quay.io/thoth-station/s2i-thoth-f31-py37 -n <your-namespace>
