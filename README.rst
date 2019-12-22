@@ -2,10 +2,8 @@ s2i-thoth
 ---------
 
 .. |s2i-thoth-ubi8-py36 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status
-:target: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36
 
 .. |s2i-thoth-f31-py37 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f31-py37/status
-:target: https://quay.io/repository/thoth-station/s2i-thoth-f31-py37
 
 Experimental Thoth container images:
 
