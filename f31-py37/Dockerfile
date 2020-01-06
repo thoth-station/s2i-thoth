@@ -1,5 +1,5 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.fedoraproject.org/f31/s2i-base
+FROM quay.io/thoth-station/f31-python37:latest
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv."
