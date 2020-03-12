@@ -30,8 +30,8 @@ function restore_pipfile_lock() {
 
 [[ ${THOTH_ADVISE} -ne 0 ]] && {
   if [[ ${THOTH_FROM_MASTER} -eq 1 ]]; then
-      pip3 install git+https://github.com/thoth-station/thamos || exit 1
-      pip3 install git+https://github.com/thoth-station/invectio || exit 1
+      pip3 install --force-reinstall -U git+https://github.com/thoth-station/thamos || exit 1
+      pip3 install --force-reinstall -U git+https://github.com/thoth-station/invectio || exit 1
   fi
 
   echo ">>> Performing hardware and software discovery..."
