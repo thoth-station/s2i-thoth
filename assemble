@@ -28,16 +28,10 @@ function restore_pipfile_lock() {
   [[ -f ../Pipfile.lock ]] && cp ../Pipfile.lock .
 }
 
-[[ ( -f Pipfile && ! -f Pipfile.lock ) || ${THOTH_ADVISE} -ne 0 ]] && {
-  echo "Updating pip and installing Thamos..."
-  # Enable pip3.
-  pip install --upgrade pip || exit 1
-
+[[ ${THOTH_ADVISE} -ne 0 ]] && {
   if [[ ${THOTH_FROM_MASTER} -eq 1 ]]; then
       pip3 install git+https://github.com/thoth-station/thamos || exit 1
       pip3 install git+https://github.com/thoth-station/invectio || exit 1
-  else
-      pip3 install thamos || exit 1
   fi
 
   echo ">>> Performing hardware and software discovery..."
