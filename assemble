@@ -18,6 +18,9 @@ export THAMOS_NO_PROGRESSBAR=${THAMOS_NO_PROGRESSBAR:-1}
 # Fallback to the lock file present in the repo if analysis fails.
 THOTH_ERROR_FALLBACK=${THOTH_ERROR_FALLBACK:-0}
 
+# Print Thoth configuration to logs if debug is enabled.
+[[ ${THOTH_ASSEMBLE_DEBUG} -eq 0 ]] || env | grep -e '^THOTH_' -e '^THAMOS_'
+
 # A directory where s2i places sources.
 pushd /tmp/src
 
