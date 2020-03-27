@@ -30,6 +30,7 @@ RUN TMPFILE=`mktemp` && \
     cat "${TMPFILE_ASSEMBLE}" >> "${STI_SCRIPTS_PATH}/assemble" && \
     tail -n+2 "${TMPFILE}" >> "${STI_SCRIPTS_PATH}/assemble" && \
     rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch && \
+    sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" && \
     chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P
 
