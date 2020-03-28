@@ -78,7 +78,7 @@ function restore_lock() {
 [[ ${THOTH_ASSEMBLE_DEBUG} -ne 0 && -f requirements.txt ]] && cat requirements.txt
 
 [[ ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
-  if [[ ${THOTH_ADVISE} -eq 0 -a ${THOTH_DRY_RUN} -eq 0 ]]; then
+  if [[ ${THOTH_ADVISE} -eq 0 && ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos provenance-check || { 
       [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
     }
