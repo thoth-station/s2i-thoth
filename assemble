@@ -79,7 +79,12 @@ function restore_lock() {
 
 [[ ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
   if [[ ${THOTH_ADVISE} -eq 0 && ${THOTH_DRY_RUN} -eq 0 ]]; then
-    thamos provenance-check || { 
+    echo ">>> Expanding Thoth's configuration file..."
+    thamos config --no-interactive || exit 1
+    echo ">>> Thoth's configuration file after expansion:"
+    cat .thoth.yaml
+    echo ">>> Asking Thoth for provenance check..."
+    thamos provenance-check || {
       [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
     }
   else
