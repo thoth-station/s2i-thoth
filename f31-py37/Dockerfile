@@ -13,7 +13,7 @@ LABEL summary="$SUMMARY" \
       name="thoth-station/s2i-thoth-f31-py37:v0.11.13" \
       vendor="AICoE at the Office of the CTO, Red Hat Inc." \
       authoritative-source-url=quay.io \
-      version="0.11.13" \
+      version="0.11.14" \
       release="0" \
       ninja.thoth-station.version="0.6.0-dev" \
       maintainer="Thoth Station <aicoe-thoth@redhat.com>"
@@ -23,7 +23,7 @@ COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
 RUN TMPFILE=`mktemp` && \
     TMPFILE_ASSEMBLE=`mktemp` && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 < /tmp/s2i_assemble.patch && popd && \
-    /usr/bin/pip3 install micropipenv[toml]==0.1.4 thamos==0.9.2 && \
+    /usr/bin/pip3 install micropipenv[toml]==0.1.5 thamos==0.9.2 && \
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
     head -n1 "${TMPFILE}" > "${STI_SCRIPTS_PATH}/assemble" && \
