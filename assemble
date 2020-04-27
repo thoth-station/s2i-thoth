@@ -44,8 +44,8 @@ function restore_lock() {
   echo ">>> Performing hardware and software discovery..."
   thamos config --no-interactive || exit 1
   echo ">>> Thoth's configuration file after hardware and software discovery:"
-  cat .thoth.yaml
-  echo ">>> Asking Thoth for advise..."
+  cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
+  echo -e "\n>>> Asking Thoth for advise..."
   if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos advise || {
       if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
@@ -82,8 +82,8 @@ function restore_lock() {
     echo ">>> Expanding Thoth's configuration file..."
     thamos config --no-interactive || exit 1
     echo ">>> Thoth's configuration file after expansion:"
-    cat .thoth.yaml
-    echo ">>> Asking Thoth for provenance check..."
+    cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
+    echo -e "\n>>> Asking Thoth for provenance check..."
     thamos provenance-check || {
       [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
     }
