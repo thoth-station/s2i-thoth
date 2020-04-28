@@ -2,7 +2,8 @@
 FROM registry.fedoraproject.org/f31/python3:latest
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
-    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv."
+    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv." \
+    THOTH_S2I_VERSION=v0.11.16
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
@@ -10,7 +11,7 @@ LABEL summary="$SUMMARY" \
       io.k8s.display-name="Thoth Python 3.6-f31 S2I" \
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="python,python37" \
-      name="thoth-station/s2i-thoth-f31-py37:v0.11.13" \
+      name="thoth-station/s2i-thoth-f31-py37:v0.11.16" \
       vendor="AICoE at the Office of the CTO, Red Hat Inc." \
       authoritative-source-url=quay.io \
       version="0.11.14" \
