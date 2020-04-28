@@ -2,7 +2,8 @@
 FROM registry.access.redhat.com/ubi8/python-36
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
-    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv."
+    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
+    THOTH_S2I_VERSION=v0.11.16
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
@@ -10,7 +11,7 @@ LABEL summary="$SUMMARY" \
       io.k8s.display-name="Thoth Python 3.6-ubi8 S2I" \
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="python,python36" \
-      name="thoth-station/s2i-thoth-ubi8-py36:v0.11.13" \
+      name="thoth-station/s2i-thoth-ubi8-py36:v0.11.16" \
       vendor="AICoE at the Office of the CTO, Red Hat Inc." \
       version="0.11.14" \
       release="0" \

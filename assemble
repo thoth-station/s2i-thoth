@@ -41,6 +41,7 @@ function restore_lock() {
       pip3 install --force-reinstall -U git+https://github.com/thoth-station/invectio || exit 1
   fi
 
+  echo ">>> Thoth s2i builder image version: ${THOTH_S2I_VERSION}"
   echo ">>> Performing hardware and software discovery..."
   thamos config --no-interactive || exit 1
   echo ">>> Thoth's configuration file after hardware and software discovery:"
