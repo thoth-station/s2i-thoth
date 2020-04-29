@@ -50,12 +50,14 @@ function restore_lock() {
   if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos advise || {
       if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
-        echo "Thoth stack analysis failed with the following log:"
+        echo ">>> Thoth stack analysis failed with the following log:"
         thamos log
-        echo "Restoring previous requirements lock"
+        echo ">>> Restoring previous requirements lock"
         restore_lock
       else
-        echo "Thoth stack analysis failed, this build will fail shortly..." >&2
+        echo ">>> Thoth stack analysis failed with the following log:"
+        thamos log
+        echo ">>> Thoth stack analysis failed, this build will fail shortly..." >&2
         exit 1
       fi
     }
@@ -65,12 +67,12 @@ function restore_lock() {
     }
   fi
 } || {
-  echo "Thoth advises are not activated"
+  echo ">>> Thoth advises are not activated"
 }
 
 # Restore previous lock, do not use the original one on dry run.
 [[ ${THOTH_DRY_RUN} -ne 0 ]] && {
-  echo "Restoring previous requirements lock as THOTH_DRY_RUN was set" >&2
+  echo ">>> Restoring previous requirements lock as THOTH_DRY_RUN was set" >&2
   restore_lock
 }
 
@@ -89,7 +91,7 @@ function restore_lock() {
       [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
     }
   else
-    echo "Provenance checks skipped as the lock file used is from Thoth"
+    echo ">>> Provenance checks skipped as the lock file used is from Thoth"
   fi
 }
 
