@@ -1,8 +1,8 @@
 diff --git a/assemble b/assemble
-index 8aeb63e..26b6961 100755
+index c6515b5..3da074c 100755
 --- a/assemble
 +++ b/assemble
-@@ -16,20 +16,6 @@ function virtualenv_bin() {
+@@ -18,20 +18,6 @@ function virtualenv_bin() {
    fi
  }
  
@@ -23,16 +23,25 @@ index 8aeb63e..26b6961 100755
  set -e
  
  shopt -s dotglob
-@@ -42,10 +28,9 @@ if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
+@@ -46,19 +32,8 @@ if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
+   pip install -U pip setuptools wheel
  fi
  
- if [[ ! -z "$ENABLE_PIPENV" ]]; then
+-if [[ ! -z "$ENABLE_PIPENV" ]]; then
 -  install_pipenv
 -  echo "---> Installing dependencies via pipenv ..."
-+  echo "---> Installing dependencies via micropipenv ..."
-   if [[ -f Pipfile ]]; then
+-  if [[ -f Pipfile ]]; then
 -    pipenv install --deploy
-+    micropipenv install --deploy
-   elif [[ -f requirements.txt ]]; then
-     pipenv install -r requirements.txt
-   fi
+-  elif [[ -f requirements.txt ]]; then
+-    pipenv install -r requirements.txt
+-  fi
+-  # pipenv check
+-elif [[ -f requirements.txt ]]; then
+-  echo "---> Installing dependencies ..."
+-  pip install -r requirements.txt
+-fi
++echo "---> Installing dependencies via micropipenv ..."
++micropipenv install --deploy
+ 
+ if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
+   echo "---> Installing application ..."
