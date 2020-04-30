@@ -55,8 +55,11 @@ function restore_lock() {
         echo ">>> Restoring previous requirements lock"
         restore_lock
       else
-        echo ">>> Thoth stack analysis failed with the following log:"
-        thamos log
+        if [[ -f ".thoth_last_analysis_id" ]]; then
+          echo ">>> Thoth stack analysis failed with the following log:"
+          thamos log
+        fi
+
         echo ">>> Thoth stack analysis failed, this build will fail shortly..." >&2
         exit 1
       fi
