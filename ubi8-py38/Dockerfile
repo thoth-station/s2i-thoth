@@ -1,8 +1,8 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.fedoraproject.org/f32/python3:latest
+FROM registry.access.redhat.com/ubi8/python-38:1-9
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
-    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv." \
+    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
     THOTH_S2I_VERSION=0.12.5 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1
@@ -10,12 +10,11 @@ ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" 
 LABEL summary="$SUMMARY" \
     description="$DESCRIPTION" \
     io.k8s.description="$DESCRIPTION" \
-    io.k8s.display-name="Thoth Python 3.6-f31 S2I" \
+    io.k8s.display-name="Thoth Python 3.6-ubi8 S2I" \
     io.openshift.expose-services="8080:http" \
-    io.openshift.tags="python,python38" \
-    name="thoth-station/s2i-thoth-f32-py38:v$THOTH_S2I_VERSION" \
+    io.openshift.tags="python,python36" \
+    name="thoth-station/s2i-thoth-ubi8-py36:v$THOTH_S2I_VERSION" \
     vendor="AICoE at the Office of the CTO, Red Hat Inc." \
-    authoritative-source-url=quay.io \
     version="$THOTH_S2I_VERSION" \
     release="0" \
     ninja.thoth-station.version="0.6.0-dev" \
