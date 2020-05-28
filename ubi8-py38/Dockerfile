@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/python-38:1-9
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
-    THOTH_S2I_VERSION=0.12.5 \
+    THOTH_S2I_VERSION=0.12.6 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1
 
@@ -22,18 +22,18 @@ LABEL summary="$SUMMARY" \
 
 USER 0
 COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
-RUN TMPFILE=$(mktemp) &&
-    TMPFILE_ASSEMBLE=$(mktemp) &&
-    pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd &&
-    /usr/bin/pip3 install micropipenv[toml]==0.1.6 thamos==0.10.0 &&
-    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" &&
-    cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" &&
-    head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" &&
-    cat "${TMPFILE_ASSEMBLE}" >>"${STI_SCRIPTS_PATH}/assemble" &&
-    tail -n+2 "${TMPFILE}" >>"${STI_SCRIPTS_PATH}/assemble" &&
-    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch &&
-    sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" &&
-    chown -R 1001:0 ${APP_ROOT} &&
+RUN TMPFILE=$(mktemp) && \
+    TMPFILE_ASSEMBLE=$(mktemp) && \
+    pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
+    /usr/bin/pip3 install micropipenv[toml]==0.1.6 thamos==0.10.0 && \
+    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
+    cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
+    head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \
+    cat "${TMPFILE_ASSEMBLE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
+    tail -n+2 "${TMPFILE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
+    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch && \
+    sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" && \
+    chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P
 
 USER 1001
