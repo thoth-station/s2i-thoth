@@ -1,7 +1,7 @@
 s2i-thoth
 ---------
 
-.. |s2i-thoth-ubi8-py36 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38/status
+.. |s2i-thoth-ubi8-py38 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38/status
 
 .. |s2i-thoth-ubi8-py36 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status
 
