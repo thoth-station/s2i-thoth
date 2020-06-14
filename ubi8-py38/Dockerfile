@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/python-38:1-9
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
-    THOTH_S2I_VERSION=0.12.6 \
+    THOTH_S2I_VERSION=0.13.1 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1
 
