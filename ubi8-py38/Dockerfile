@@ -36,6 +36,7 @@ RUN TMPFILE=$(mktemp) && \
     rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch && \
     sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" && \
     chown -R 1001:0 ${APP_ROOT} && \
-    fix-permissions ${APP_ROOT} -P
+    fix-permissions ${APP_ROOT} -P && \
+    yum update --assumeyes --setopt=tsflags=nodocs
 
 USER 1001

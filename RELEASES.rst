@@ -2,20 +2,20 @@
 Release Notes
 =============
 
-.. _Release Notes_v0.14.0:
+.. _Release Notes_v0.13.1-4:
 
-v0.14.0
-=======
+v0.13.1-4
+=========
 
-.. _Release Notes_v0.14.0_Prelude:
+.. _Release Notes_v0.13.1-4_Prelude:
 
 Prelude
 -------
 
-This update features tooling and base image updates.
+This update features tooling and base image updates. For each UBI8 image, we do an additional `yum update`.
 
 
-.. _Release Notes_v0.14.0_Upgrade Notes:
+.. _Release Notes_v0.13.1-4_Upgrade Notes:
 
 Upgrade Notes
 -------------
@@ -26,7 +26,7 @@ Upgrade Notes
   * thamos 0.10.6
 
 
-.. _Release Notes_v0.14.0_Security Issues:
+.. _Release Notes_v0.13.1-4_Security Issues:
 
 Security Issues
 ---------------
