@@ -1,0 +1,5 @@
+---
+security:
+  - |
+    Updated the Python3.6 and 3.8 UBI8 images to their latest versions, this
+    included fixes for RHBA-2020:3059 
