@@ -3,7 +3,7 @@ FROM registry.fedoraproject.org/f32/python3:latest
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv." \
-    THOTH_S2I_VERSION=0.14.1 \
+    THOTH_S2I_VERSION=0.14.2 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1
 
@@ -30,7 +30,7 @@ RUN TMPFILE=$(mktemp) && \
     /usr/bin/pip3 install micropipenv[toml]==0.5.0 thamos==0.10.6 && \
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
-    head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \ 
+    head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \
     cat "${TMPFILE_ASSEMBLE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
     tail -n+2 "${TMPFILE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
     rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch && \
