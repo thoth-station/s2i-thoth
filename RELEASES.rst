@@ -2,6 +2,20 @@
 Release Notes
 =============
 
+.. _Release Notes_v0.14.3:
+
+v0.14.3
+=======
+
+.. _Release Notes_v0.14.3_Security Issues:
+
+Security Issues
+---------------
+
+- The UBI8 based images have been updated to the latest tags to include
+  fixes for https://access.redhat.com/errata/RHBA-2020:3156
+
+
 .. _Release Notes_v0.14.1:
 
 v0.14.1
