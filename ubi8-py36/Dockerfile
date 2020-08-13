@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/python-36:1-107
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
-    THOTH_S2I_VERSION=0.14.2 \
+    THOTH_S2I_VERSION=0.15.0 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1
 
@@ -26,7 +26,7 @@ COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
-    /usr/bin/pip3 install micropipenv[toml]==0.5.0 thamos==0.10.6 && \
+    /usr/bin/pip3 install micropipenv[toml]==0.5.2 thamos==0.11.1 && \
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
     head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \
