@@ -22,7 +22,7 @@ LABEL summary="$SUMMARY" \
     maintainer="Thoth Station <aicoe-thoth@redhat.com>"
 
 USER 0
-COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
+COPY ubi8-py36/s2i_assemble.patch /tmp/s2i_assemble.patch
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \

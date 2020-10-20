@@ -1,0 +1,48 @@
+---
+kind: ImageStream
+apiVersion: v1
+metadata:
+  labels:
+    app: thoth
+    component: s2i-thoth
+  name: s2i-thoth-py36-ubi8
+spec:
+  name: latest
+  lookupPolicy:
+    local: true
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: s2i-thoth-py36-ubi8
+spec:
+  resources:
+    limits:
+      cpu: "1"
+      memory: 768Mi
+    requests:
+      cpu: "1"
+      memory: 768Mi
+  output:
+    to:
+      kind: ImageStreamTag
+      name: "s2i-thoth-py36-ubi8"
+  runPolicy: Serial
+  source:
+    type: Git
+    git:
+      uri: "https://github.com/thoth-station/s2i-thoth"
+      ref: openshift
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: "ubi8-py36/Dockerfile"
+      noCache: true
+    env:
+      - name: ENABLE_PIPENV
+        value: "1"
+      - name: UPGRADE_PIP_TO_LATEST
+        value: ""
+  triggers:
+    - imageChange: {}
+      type: ImageChange
