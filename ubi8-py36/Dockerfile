@@ -26,6 +26,8 @@ COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
+    pip3 install -U "pip==20.1.1" && \
+    /usr/bin/pip3 install -U "pip==20.1.1" && \
     /usr/bin/pip3 install micropipenv[toml]==1.0.1 thamos==1.4.0 && \
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
