@@ -9,6 +9,8 @@ THOTH_ASSEMBLE_DEBUG=${THOTH_ASSEMBLE_DEBUG:-0}
 THOTH_DRY_RUN=${THOTH_DRY_RUN:-0}
 # Force advises even if the lock is present in the repo:
 THOTH_ADVISE=${THOTH_ADVISE:-1}
+# Trigger Thoth configuration file check:
+THOTH_CONFIG_CHECK=${THOTH_CONFIG_CHECK:-1}
 # Use provenance checks by default if THOTH_ADVISE is set to 0.
 THOTH_PROVENANCE_CHECK=${THOTH_PROVENANCE_CHECK:-1}
 # Use Thamos from git instead of a PyPI release:
@@ -33,6 +35,17 @@ pushd /tmp/src
 function restore_lock() {
   [[ -f ../Pipfile.lock ]] && cp ../Pipfile.lock .
   [[ -f ../requirements.txt ]] && cp ../requirements.txt .
+}
+
+[[ ${THOTH_CONFIG_CHECK} -ne 0 ]] && {
+  thamos check || {
+    if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
+      echo ">>> Check of the configuration file failed, proceeding with the installation process based on the error fallback flag"
+    else
+      echo ">>> Aborting build as Thoth's configuration check failed" >&2
+      exit 1
+    fi
+  }
 }
 
 [[ ${THOTH_ADVISE} -ne 0 ]] && {
