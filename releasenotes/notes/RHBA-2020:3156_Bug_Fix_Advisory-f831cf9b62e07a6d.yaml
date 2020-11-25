@@ -1,5 +1,0 @@
----
-security:
-  - |
-    The UBI8 based images have been updated to the latest tags to include
-    fixes for https://access.redhat.com/errata/RHBA-2020:3156
