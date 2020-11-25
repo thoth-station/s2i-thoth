@@ -1,47 +1,11 @@
-diff --git a/assemble b/assemble
-index c6515b5..3da074c 100755
---- a/assemble
-+++ b/assemble
-@@ -18,20 +18,6 @@ function virtualenv_bin() {
-   fi
- }
+--- a/assemble	2020-08-26 08:36:24.689696930 +0200
++++ b/assemble	2020-08-26 08:38:32.765236073 +0200
+@@ -1,4 +1,7 @@
+ #!/bin/bash
++# Thoth's addition always uses micropipenv.
++unset ENABLE_PIPENV
++export ENABLE_MICROPIPENV=1
  
--# Install pipenv to the separate virtualenv to isolate it
--# from system Python packages and packages in the main
--# virtualenv. Executable is simlinked into ~/.local/bin
--# to be accessible. This approach is inspired by pipsi
--# (pip script installer).
--function install_pipenv() {
--  echo "---> Installing pipenv packaging tool ..."
--  VENV_DIR=$HOME/.local/venvs/pipenv
--  virtualenv_bin "$VENV_DIR"
--  $VENV_DIR/bin/pip --isolated install -U pipenv
--  mkdir -p $HOME/.local/bin
--  ln -s $VENV_DIR/bin/pipenv $HOME/.local/bin/pipenv
--}
--
- set -e
- 
- shopt -s dotglob
-@@ -46,19 +32,8 @@ if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
-   pip install -U pip setuptools wheel
- fi
- 
--if [[ ! -z "$ENABLE_PIPENV" ]]; then
--  install_pipenv
--  echo "---> Installing dependencies via pipenv ..."
--  if [[ -f Pipfile ]]; then
--    pipenv install --deploy
--  elif [[ -f requirements.txt ]]; then
--    pipenv install -r requirements.txt
--  fi
--  # pipenv check
--elif [[ -f requirements.txt ]]; then
--  echo "---> Installing dependencies ..."
--  pip install -r requirements.txt
--fi
-+echo "---> Installing dependencies via micropipenv ..."
-+micropipenv install --deploy
- 
- if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
-   echo "---> Installing application ..."
+ function is_django_installed() {
+   python -c "import django" &>/dev/null
+
