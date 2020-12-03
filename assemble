@@ -42,7 +42,7 @@ function restore_lock() {
     if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
       echo ">>> Check of the configuration file failed, proceeding with the installation process based on the error fallback flag"
     else
-      echo ">>> Aborting build as Thoth's configuration check failed" >&2
+      echo ">>> Aborting build as Thoth's configuration check failed; you can suppress the failure by providing THOTH_ERROR_FALLBACK=1" >&2
       exit 1
     fi
   }
@@ -73,7 +73,7 @@ function restore_lock() {
           thamos log
         fi
 
-        echo ">>> Thoth stack analysis failed, this build will fail shortly..." >&2
+        echo ">>> Thoth stack analysis failed, this build will fail shortly; you can suppress this failure by providing THOTH_ERROR_FALLBACK=1" >&2
         exit 1
       fi
     }
