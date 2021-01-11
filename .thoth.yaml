@@ -1,6 +1,6 @@
 host: khemenu.thoth-station.ninja
 tls_verify: false
-requirements_format: pipenv
+requirements_format: pip
 
 runtime_environments:
   - name: 'rhel:8'
