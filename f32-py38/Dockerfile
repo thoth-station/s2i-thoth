@@ -26,15 +26,16 @@ COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
-    pip3 install -U "pip==20.1.1" && \
-    /usr/bin/pip3 install -U "pip==20.1.1" && \
-    /usr/bin/pip3 install micropipenv[toml]==1.0.1 thamos==1.5.2 && \
+    pip3 install -U "pip==20.3.3" && \
+    /usr/bin/pip3 install -U "pip==20.3.3" && \
+    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/requirements.txt" -o requirements.txt && \
+    MICROPIPENV_PIP_BIN=/usr/bin/pip3 curl https://raw.githubusercontent.com/thoth-station/micropipenv/master/micropipenv.py | python3 - install --
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
     head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \
     cat "${TMPFILE_ASSEMBLE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
     tail -n+2 "${TMPFILE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
-    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch && \
+    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch requirements.txt && \
     sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" && \
     chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P
