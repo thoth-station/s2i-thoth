@@ -48,6 +48,20 @@ Building container images
 
 Container images are automatically built in quay.io when pushed to master branch.
 
+Updating and releasing new container images
+===========================================
+
+This repository is managed by `Kebechet
+<https://github.com/thoth-station/kebechet/>`__ so updates of all the Python
+packages it uses are performed automatically. If you wish to release a new
+version of Thoth's s2i, you can do so by performing:
+
+.. code-block:: console
+
+  find -iname Dockerfile -exec sed -i 's/THOTH_S2I_VERSION=0.23.0/THOTH_S2I_VERSION=0.24.0/g' {} \; && git commit -m "Version 0.24.0" . && git tag v0.24.0
+
+A subsequent pull request to this repository is needed.
+
 Importing image into OpenShift's registry
 =========================================
 
