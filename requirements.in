@@ -1,0 +1,6 @@
+--index-url https://pypi.org/simple
+#
+# Default dependencies
+#
+thamos
+micropipenv[toml]
