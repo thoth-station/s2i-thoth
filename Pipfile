@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 thamos = "*"
-micropipenv = "*"
+micropipenv = {extras = ["toml"], version = "*"}
 
 [requires]
 python_version = "3.8"
