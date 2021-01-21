@@ -58,7 +58,7 @@ function restore_lock() {
   echo ">>> Performing hardware and software discovery..."
   thamos config --no-interactive || exit 1
   echo ">>> Thoth's configuration file after hardware and software discovery:"
-  cat .thoth.yaml | python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
+  cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
   echo -e "\n>>> Asking Thoth for advise..."
   if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos advise || {
