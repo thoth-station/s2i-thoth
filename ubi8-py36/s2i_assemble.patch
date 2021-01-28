@@ -1,5 +1,5 @@
---- a/assemble    2020-10-31 11:55:38.000000000 +0100
-+++ b/assemble    2020-11-25 22:32:16.739312082 +0100
+--- a/assemble	2021-02-03 00:47:32.933974357 -0500
++++ b/assemble	2021-02-03 00:47:19.755948963 -0500
 @@ -18,38 +18,8 @@
    fi
  }
@@ -56,7 +56,7 @@
  if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
    echo "---> Upgrading pip to latest version ..."
    if ! pip install -U pip setuptools wheel; then
-@@ -75,28 +35,7 @@
+@@ -75,26 +35,9 @@
    fi
  fi
 
@@ -80,9 +80,8 @@
 -  micropipenv install --deploy
 -elif [[ -f requirements.txt ]]; then
 -  echo "---> Installing dependencies ..."
--  pip install -r requirements.txt
--fi
-+thamos install
-
- if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
-   echo "---> Installing application ..."
++if [[ -z "$PIP_INDEX_URL" ]]; then
++  thamos install
++else
+   pip install -r requirements.txt
+ fi

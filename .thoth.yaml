@@ -1,0 +1,16 @@
+host: khemenu.thoth-station.ninja
+tls_verify: false
+requirements_format: pip
+
+runtime_environments:
+  - name: 'ubi8'
+    operating_system:
+      name: ubi
+      version: "8.0"
+    python_version: "3.8"
+    recommendation_type: latest
+
+managers:
+  - name: update
+    configuration:
+      labels: [bot]

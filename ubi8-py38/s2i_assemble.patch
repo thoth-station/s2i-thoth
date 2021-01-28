@@ -1,7 +1,7 @@
---- a/assemble    2020-10-31 11:55:38.000000000 +0100
-+++ b/assemble    2020-11-25 22:32:16.739312082 +0100
-@@ -18,38 +18,8 @@
-   fi
+--- a/assemble	2021-04-17 00:25:31.462528247 -0400
++++ b/assemble	2021-04-17 00:30:46.454755974 -0400
+@@ -14,38 +14,8 @@
+     python3.8 -m venv $1
  }
 
 -# Install pipenv or micropipenv to the separate virtualenv to isolate it
@@ -39,7 +39,7 @@
  shopt -s dotglob
  echo "---> Installing application source ..."
  mv /tmp/src/* "$HOME"
-@@ -57,16 +27,6 @@
+@@ -53,16 +23,6 @@
  # set permissions for any installed artifacts
  fix-permissions /opt/app-root -P
 
@@ -56,7 +56,7 @@
  if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
    echo "---> Upgrading pip to latest version ..."
    if ! pip install -U pip setuptools wheel; then
-@@ -75,28 +35,7 @@
+@@ -71,26 +31,9 @@
    fi
  fi
 
@@ -80,9 +80,8 @@
 -  micropipenv install --deploy
 -elif [[ -f requirements.txt ]]; then
 -  echo "---> Installing dependencies ..."
--  pip install -r requirements.txt
--fi
-+thamos install
-
- if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
-   echo "---> Installing application ..."
++if [[ -z "$PIP_INDEX_URL" ]]; then
++  thamos install
++else
+   pip install -r requirements.txt
+ fi

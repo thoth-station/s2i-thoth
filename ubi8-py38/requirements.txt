@@ -118,10 +118,11 @@ delegator.py==0.1.1 \
     --hash=sha256:814657d96b98a244c479e3d5f6e9e850ac333e85f807d6bc846e72bbb2537806 \
     --hash=sha256:e6cc9cedab9ae59b169ee0422e17231adedadb144e63c0b5a60e6ff8adf8521b
     # via thoth-analyzer
-dictdiffer==0.8.1 \
-    --hash=sha256:1adec0d67cdf6166bda96ae2934ddb5e54433998ceab63c984574d187cc563d2 \
-    --hash=sha256:d79d9a39e459fe33497c858470ca0d2e93cb96621751de06d631856adfd9c390
-    # via openshift
+dictdiffer==0.5.0 \
+    --hash=sha256:15cb791cf023f459ac8fafd6be0401ce54700a351708e6d7ff08edcd0af42da7
+    # via
+    #   -r requirements.in
+    #   openshift
 distlib==0.3.1 \
     --hash=sha256:8c09de2c67b3e7deef7184574fc060ab8a793e7adbb183d942c389c8b13c52fb \
     --hash=sha256:edf6116872c863e1aa9d5bb7cb5e05a022c519a4594dc703843343a9ddd9bff1

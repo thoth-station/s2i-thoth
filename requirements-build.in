@@ -1,0 +1,8 @@
+setuptools==52.0.0
+setuptools-scm==5.0.1
+wheel==0.36.2
+pip==20.3.3
+pbr==5.5.1
+flit-core==3.2.0
+Cython
+poetry-core>=1.0.0
