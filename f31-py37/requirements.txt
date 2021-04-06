@@ -130,10 +130,6 @@ idna==2.10 \
     # via
     #   requests
     #   yarl
-importlib-metadata==3.4.0 \
-    --hash=sha256:ace61d5fc652dc280e7b6b4ff732a9c2d40db2c0f92bc6cb74e07b73d53a1771 \
-    --hash=sha256:fa5daa4477a7414ae34e95942e4dd07f62adf589143c875c133c1e53c4eff38d
-    # via jsonschema
 invectio==0.1.0 \
     --hash=sha256:4a720cc25cd8390af8555fd68a36e6a119f45a7870a31b818922342015c9b912 \
     --hash=sha256:831b5de477e76fa07ed81b298cddf55b9886c0124217442cae21d8bb90e191ca
@@ -253,7 +249,7 @@ micropipenv[toml]==1.0.2 \
     --hash=sha256:908098c2bdd705ec72c920fa7e6346c3ed2c37bb01c8b2674324413c3baf0c8d \
     --hash=sha256:fe7711bd604d55223eb50d3e3a136abefe5a7da268b2f214817d4914206e7875
     # via
-    #   -r requirements.in
+    #   -r f31-py37/requirements.in
     #   thamos
 mock==4.0.3 \
     --hash=sha256:122fcb64ee37cfad5b3f48d7a7d51875d7031aaf3d8be7c42e2bee25044eee62 \
@@ -477,7 +473,7 @@ termcolor==1.1.0 \
     # via thamos
 thamos==1.13.0 \
     --hash=sha256:6aee364066147474ffc19c4ce90448d8a79bd92fbb90430d6573b930ded823f4
-    # via -r requirements.in
+    # via -r f31-py37/requirements.in
 thoth-analyzer==0.1.8 \
     --hash=sha256:3f830334a3ba725cacf64ccc756e42f0c7946fd8038da6565cb2de569ea5c9c1 \
     --hash=sha256:8a29ce615e5feddd301a8c6656132268bede23d4187a5cfb60f790f80cd04dc1
@@ -505,16 +501,14 @@ typing-extensions==3.7.4.3 \
     --hash=sha256:dafc7639cde7f1b6e1acc0f457842a83e722ccca8eef5270af2d74792619a89f
     # via
     #   aiohttp
-    #   importlib-metadata
     #   rich
-    #   yarl
 tzlocal==2.1 \
     --hash=sha256:643c97c5294aedc737780a49d9df30889321cbe1204eac2c2ec6134035a92e44 \
     --hash=sha256:e2cb6c6b5b604af38597403e9852872d7f534962ae2954c7f35efcb1ccacf4a4
     # via rfc5424-logging-handler
-urllib3==1.26.3 \
-    --hash=sha256:1b465e494e3e0d8939b50680403e3aedaa2bc434b7d5af64dfd3c958d7f5ae80 \
-    --hash=sha256:de3eedaad74a2683334e282005cd8d7f22f4d55fa690a2a1020a416cb0a47e73
+urllib3==1.26.4 \
+    --hash=sha256:2f4da4594db7e1e110a944bb1b551fdf4e6c136ad42e4234131391e21eb5b0df \
+    --hash=sha256:e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937
     # via
     #   kubernetes
     #   requests
@@ -567,10 +561,6 @@ yaspin==1.4.0 \
     --hash=sha256:681654848e5cd463e4c1f896ff03165979773a34789cc787276d9d8d0151ae1d \
     --hash=sha256:faefab3e7c29d8de5be0561105aaaf41eaa9824932151d7b4c94cb0c46a70926
     # via thamos
-zipp==3.4.0 \
-    --hash=sha256:102c24ef8f171fd729d46599845e95c7ab894a4cf45f5de11a44cc7444fb1108 \
-    --hash=sha256:ed5eee1974372595f9e416cc7bbeeb12335201d8081ca8a0743c954d4446e5cb
-    # via importlib-metadata
 
 # WARNING: The following packages were not pinned, but pip requires them to be
 # pinned when the requirements file includes hashes. Consider using the --allow-unsafe flag.

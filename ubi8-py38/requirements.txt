@@ -249,7 +249,7 @@ micropipenv[toml]==1.0.2 \
     --hash=sha256:908098c2bdd705ec72c920fa7e6346c3ed2c37bb01c8b2674324413c3baf0c8d \
     --hash=sha256:fe7711bd604d55223eb50d3e3a136abefe5a7da268b2f214817d4914206e7875
     # via
-    #   -r requirements.in
+    #   -r ubi8-py38/requirements.in
     #   thamos
 mock==4.0.3 \
     --hash=sha256:122fcb64ee37cfad5b3f48d7a7d51875d7031aaf3d8be7c42e2bee25044eee62 \
@@ -473,7 +473,7 @@ termcolor==1.1.0 \
     # via thamos
 thamos==1.13.0 \
     --hash=sha256:6aee364066147474ffc19c4ce90448d8a79bd92fbb90430d6573b930ded823f4
-    # via -r requirements.in
+    # via -r ubi8-py38/requirements.in
 thoth-analyzer==0.1.8 \
     --hash=sha256:3f830334a3ba725cacf64ccc756e42f0c7946fd8038da6565cb2de569ea5c9c1 \
     --hash=sha256:8a29ce615e5feddd301a8c6656132268bede23d4187a5cfb60f790f80cd04dc1
@@ -506,9 +506,9 @@ tzlocal==2.1 \
     --hash=sha256:643c97c5294aedc737780a49d9df30889321cbe1204eac2c2ec6134035a92e44 \
     --hash=sha256:e2cb6c6b5b604af38597403e9852872d7f534962ae2954c7f35efcb1ccacf4a4
     # via rfc5424-logging-handler
-urllib3==1.26.3 \
-    --hash=sha256:1b465e494e3e0d8939b50680403e3aedaa2bc434b7d5af64dfd3c958d7f5ae80 \
-    --hash=sha256:de3eedaad74a2683334e282005cd8d7f22f4d55fa690a2a1020a416cb0a47e73
+urllib3==1.26.4 \
+    --hash=sha256:2f4da4594db7e1e110a944bb1b551fdf4e6c136ad42e4234131391e21eb5b0df \
+    --hash=sha256:e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937
     # via
     #   kubernetes
     #   requests
