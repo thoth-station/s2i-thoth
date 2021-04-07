@@ -26,6 +26,10 @@ build Python applications. They extend the functionality of base s2i Python
 container images so that applications using these container images benefit from
 Thoth's recommendations.
 
+See `thoth-station/s2i-example
+<https://github.com/thoth-station/s2i-example>`__ repository with OpenShift s2i
+examples.
+
 Configuration options
 =====================
 
