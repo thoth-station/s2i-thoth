@@ -6,7 +6,9 @@ ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" 
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-ubi8-py36 \
     THOTH_S2I_VERSION=0.26.0 \
     THAMOS_NO_PROGRESSBAR=1 \
-    THAMOS_NO_EMOJI=1
+    THAMOS_NO_EMOJI=1 \
+    MICROPIPENV_NO_LOCKFILE_PRINT=0 \
+    MICROPIPENV_NO_LOCKFILE_WRITE=0
 
 LABEL summary="$SUMMARY" \
     description="$DESCRIPTION" \
