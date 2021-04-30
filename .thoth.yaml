@@ -21,6 +21,3 @@ managers:
         - sesheta
       labels: [bot]
       changelog_file: false
-  - name: update
-    configuration:
-      labels: [bot]
