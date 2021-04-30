@@ -266,9 +266,9 @@ markupsafe==1.1.1 \
     --hash=sha256:e8313f01ba26fbbe36c7be1966a7b7424942f670f38e666995b88d012765b9be \
     --hash=sha256:feb7b34d6325451ef96bc0e36e1a6c0c1c64bc1fbec4b854f4529e51887b1621
     # via jinja2
-micropipenv[toml]==1.0.3 \
-    --hash=sha256:9bd7290c5d57868c6a54759d43bb57269f525e0ed2ae2f42d29b310f222889b1 \
-    --hash=sha256:d9fb9f946e34ba88058ac6013323febcfc418f0426684d81da7984c46c72e107
+micropipenv[toml]==1.0.4 \
+    --hash=sha256:45998ce518854305ac3e18adf2c935bc250878e96679e22d15f77ad7dbea477b \
+    --hash=sha256:dfd2219a709e6e150ae1d0164135096b31362ba4d7df9b19b5da01837cbaacce
     # via
     #   -r requirements.in
     #   thamos
@@ -501,8 +501,9 @@ six==1.15.0 \
 termcolor==1.1.0 \
     --hash=sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b
     # via thamos
-thamos==1.18.0 \
-    --hash=sha256:6e5264f2bf9809523d068898c204f1d1099fe3267de6f29aac578f6ea2d04df7
+thamos==1.18.1 \
+    --hash=sha256:91fb1732c6f71e3c95737fdd78df3c6c9f0ae42f4fee635e865f8a34ebbab72d \
+    --hash=sha256:b127f2397e9add8ef8899a35e0bef086d23369b87039d01f06903381a8e2884d
     # via -r requirements.in
 thoth-analyzer==0.1.8 \
     --hash=sha256:3f830334a3ba725cacf64ccc756e42f0c7946fd8038da6565cb2de569ea5c9c1 \
