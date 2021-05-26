@@ -1,5 +1,5 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.access.redhat.com/ubi8/python-38:1-47
+FROM registry.access.redhat.com/ubi8/python-38:1-60
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
@@ -42,6 +42,6 @@ RUN TMPFILE=$(mktemp) && \
     sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" && \
     chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P && \
-    yum update --assumeyes --setopt=tsflags=nodocs
+    yum update --assumeyes --nobest --setopt=tsflags=nodocs
 
 USER 1001
