@@ -9,6 +9,8 @@ s2i-thoth
 
 .. |s2i-thoth-f32-py38 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f32-py38/status
 
+.. |s2i-thoth-f34-py39 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f34-py39/status
+
 Experimental Thoth container images:
 
 * `quay.io/thoth-station/s2i-thoth-ubi8-py38 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38>`_ |s2i-thoth-ubi8-py38 on Quay|
@@ -18,6 +20,8 @@ Experimental Thoth container images:
 * `quay.io/thoth-station/s2i-thoth-f31-py37 <https://quay.io/repository/thoth-station/s2i-thoth-f31-py37>`_ |s2i-thoth-f31-py37 on Quay|
 
 * `quay.io/thoth-station/s2i-thoth-f32-py38 <https://quay.io/repository/thoth-station/s2i-thoth-f32-py38>`_ |s2i-thoth-f32-py38 on Quay|
+
+* `quay.io/thoth-station/s2i-thoth-f34-py39 <https://quay.io/repository/thoth-station/s2i-thoth-f34-py39>`_ |s2i-thoth-f34-py39 on Quay|
 
 Artifacts needed to build `s2i-thoth-*` container images.
 
