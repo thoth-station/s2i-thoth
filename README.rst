@@ -7,6 +7,8 @@ s2i-thoth
 
 .. |s2i-thoth-f31-py37 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f31-py37/status
 
+.. |s2i-thoth-f32-py38 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f32-py38/status
+
 .. |s2i-thoth-f34-py39 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f34-py39/status
 
 Experimental Thoth container images:
