@@ -2,7 +2,7 @@
 FROM registry.fedoraproject.org/f34/python3:latest
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
-    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv." \
+    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 34. It includes Pipenv." \
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-f34-py39 \
     THOTH_S2I_VERSION=0.28.0 \
     THAMOS_NO_PROGRESSBAR=1 \
