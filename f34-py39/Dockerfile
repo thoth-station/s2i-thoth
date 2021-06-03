@@ -1,9 +1,9 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.fedoraproject.org/f31/python3:latest
+FROM registry.fedoraproject.org/f34/python3:latest
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
-    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 31. It includes Pipenv." \
-    THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-f31-py37 \
+    DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 34. It includes Pipenv." \
+    THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-f34-py39 \
     THOTH_S2I_VERSION=0.29.0 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1 \
@@ -13,9 +13,9 @@ ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" 
 LABEL summary="$SUMMARY" \
     description="$DESCRIPTION" \
     io.k8s.description="$DESCRIPTION" \
-    io.k8s.display-name="Thoth Python 3.6-f31 S2I" \
+    io.k8s.display-name="Thoth Python 3.9-f34 S2I" \
     io.openshift.expose-services="8080:http" \
-    io.openshift.tags="python,python37" \
+    io.openshift.tags="python,python39" \
     name="$THOTH_S2I_NAME:v$THOTH_S2I_VERSION" \
     vendor="AICoE at the Office of the CTO, Red Hat Inc." \
     authoritative-source-url="https://quay.io/thoth-station/s2i-thoth" \
@@ -31,7 +31,7 @@ RUN TMPFILE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
     pip3 install -U "pip==20.3.3" && \
     /usr/bin/pip3 install -U "pip==20.3.3" && \
-    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/f31-py37/requirements.txt" -o requirements.txt && \
+    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/f34-py39/requirements.txt" -o requirements.txt && \
     MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 curl https://raw.githubusercontent.com/thoth-station/micropipenv/master/micropipenv.py | /usr/bin/python3 - install -- && \
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
