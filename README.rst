@@ -48,6 +48,7 @@ Configuration options for Thoth's s2i image:
 
 * ``THOTH_ADVISE`` - always use the recommended stack by Thoth (even if the lock file is present in the repo)
 * ``THOTH_CONFIG_CHECK`` - verify values stated in the configuration file match the build environment
+* ``THOTH_FORCE_GENERATE_CONFIG`` - generate configuration file during the build process, overwrites already existing configuration file if present
 * ``THOTH_PROVENANCE_CHECK`` - verify stack provenance - the provenance check is triggered only if the lock file is not comming from Thoth's recommendation engine (otherwise the stack has already verified provenance)
 * ``THOTH_ASSEMBLE_DEBUG`` - run s2i's assemble script in verbose mode
 * ``THOTH_DRY_RUN`` - submit stack to Thoth's recommendation engine but do **NOT** use the recommended lock file, use the lock file present in the repo instead
