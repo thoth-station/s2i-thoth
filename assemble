@@ -23,6 +23,16 @@ export THOTH_HOST=${THOTH_HOST:-khemenu.thoth-station.ninja}
 export THAMOS_NO_PROGRESSBAR=${THAMOS_NO_PROGRESSBAR:-1}
 # Fallback to the lock file present in the repo if analysis fails.
 THOTH_ERROR_FALLBACK=${THOTH_ERROR_FALLBACK:-0}
+# Turn off Thoth using just one flag, only config generation is enabled.
+THOTH_OFF=${THOTH_OFF:-0}
+
+[[ ${THOTH_OFF} -ne 0 ]] && {
+  echo ">>> Disabling Thoth"
+  THOTH_ADVISE=0
+  THOTH_PROVENANCE_CHECK=0
+  THOTH_CONFIG_CHECK=0
+  THOTH_DRY_RUN=1
+}
 
 # Print Thoth configuration to logs if debug is enabled.
 [[ ${THOTH_ASSEMBLE_DEBUG} -eq 0 ]] || env | grep -e '^THOTH_' -e '^THAMOS_'
