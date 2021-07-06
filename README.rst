@@ -46,6 +46,7 @@ Configuration options
 Configuration options for Thoth's s2i image:
 
 * ``THOTH_ADVISE`` - always use the recommended stack by Thoth (even if the lock file is present in the repo)
+* ``THOTH_OFF`` - disable all the Thoth features, only ``THOTH_FORCE_GENERATE_CONFIG`` can be supplied if ``.thoth.yaml`` is not available
 * ``THOTH_CONFIG_CHECK`` - verify values stated in the configuration file match the build environment
 * ``THOTH_FORCE_GENERATE_CONFIG`` - generate configuration file during the build process, overwrites already existing configuration file if present
 * ``THOTH_PROVENANCE_CHECK`` - verify stack provenance - the provenance check is triggered only if the lock file is not comming from Thoth's recommendation engine (otherwise the stack has already verified provenance)
