@@ -6,7 +6,7 @@ repos:
       - id: remove-tabs
 
   - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.0.1
     hooks:
       - id: trailing-whitespace
       - id: check-merge-conflict
@@ -17,7 +17,7 @@ repos:
       - id: detect-private-key
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.0.1
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
