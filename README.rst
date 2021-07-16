@@ -1,25 +1,21 @@
 s2i-thoth
 ---------
 
+.. |s2i-thoth-ubi8-py39 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py39/status
+
 .. |s2i-thoth-ubi8-py38 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38/status
 
 .. |s2i-thoth-ubi8-py36 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36/status
-
-.. |s2i-thoth-f31-py37 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f31-py37/status
-
-.. |s2i-thoth-f32-py38 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f32-py38/status
 
 .. |s2i-thoth-f34-py39 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f34-py39/status
 
 Experimental Thoth container images:
 
+* `quay.io/thoth-station/s2i-thoth-ubi8-py39 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py39>`_ |s2i-thoth-ubi8-py39 on Quay|
+
 * `quay.io/thoth-station/s2i-thoth-ubi8-py38 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38>`_ |s2i-thoth-ubi8-py38 on Quay|
 
 * `quay.io/thoth-station/s2i-thoth-ubi8-py36 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36>`_ |s2i-thoth-ubi8-py36 on Quay|
-
-* `quay.io/thoth-station/s2i-thoth-f31-py37 <https://quay.io/repository/thoth-station/s2i-thoth-f31-py37>`_ |s2i-thoth-f31-py37 on Quay|
-
-* `quay.io/thoth-station/s2i-thoth-f32-py38 <https://quay.io/repository/thoth-station/s2i-thoth-f32-py38>`_ |s2i-thoth-f32-py38 on Quay|
 
 * `quay.io/thoth-station/s2i-thoth-f34-py39 <https://quay.io/repository/thoth-station/s2i-thoth-f34-py39>`_ |s2i-thoth-f34-py39 on Quay|
 
@@ -83,5 +79,5 @@ Importing image into OpenShift's registry
 
 .. code-block:: console
 
-  oc import-image quay.io/thoth-station/s2i-thoth-ubi8-py36 -n <your-namespace>
-  oc import-image quay.io/thoth-station/s2i-thoth-f31-py37 -n <your-namespace>
+  oc import-image quay.io/thoth-station/s2i-thoth-ubi8-py39 -n <your-namespace>
+  oc import-image quay.io/thoth-station/s2i-thoth-f34-py39 -n <your-namespace>
