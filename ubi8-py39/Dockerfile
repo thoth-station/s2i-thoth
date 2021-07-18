@@ -31,7 +31,7 @@ RUN pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd &
     pip3 install -U "pip==21.1.3" && \
     /usr/bin/pip3 install -U "pip==21.1.3" && \
     /usr/bin/pip3 install -U "micropipenv" && \
-    pushd /tmp && MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 micropipenv install && popd && \ 
+    pushd /tmp && MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 micropipenv install && popd && \
     chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P && \
     yum update --assumeyes --nobest --setopt=tsflags=nodocs
