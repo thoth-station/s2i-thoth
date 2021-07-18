@@ -26,20 +26,12 @@ LABEL summary="$SUMMARY" \
 
 USER 0
 COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
-RUN TMPFILE=$(mktemp) && \
-    TMPFILE_ASSEMBLE=$(mktemp) && \
-    pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
-    pip3 install -U "pip==20.3.3" && \
-    /usr/bin/pip3 install -U "pip==20.3.3" && \
-    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/ubi8-py39/requirements.txt" -o requirements.txt && \
-    MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 curl https://raw.githubusercontent.com/thoth-station/micropipenv/master/micropipenv.py | /usr/bin/python3 - install -- && \
-    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
-    cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
-    head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \
-    cat "${TMPFILE_ASSEMBLE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
-    tail -n+2 "${TMPFILE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
-    rm "${TMPFILE}" "${TMPFILE_ASSEMBLE}" /tmp/s2i_assemble.patch requirements.txt && \
-    sed -i '/  echo "---> Running application from .*/d' "${STI_SCRIPTS_PATH}/run" && \
+COPY ./requirements.txt /tmp/requirements.txt
+RUN pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
+    pip3 install -U "pip==21.1.3" && \
+    /usr/bin/pip3 install -U "pip==21.1.3" && \
+    /usr/bin/pip3 install -U "micropipenv" && \
+    pushd /tmp && MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 micropipenv install && popd && \ 
     chown -R 1001:0 ${APP_ROOT} && \
     fix-permissions ${APP_ROOT} -P && \
     yum update --assumeyes --nobest --setopt=tsflags=nodocs
