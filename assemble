@@ -49,9 +49,18 @@ function restore_lock() {
   [[ -f ../requirements.txt ]] && cp ../requirements.txt .
 }
 
+echo ">>> Thoth s2i builder image version: ${THOTH_S2I_VERSION}"
+
 [[ ${THOTH_FORCE_GENERATE_CONFIG} -ne 0 ]] && {
   rm -f .thoth.yaml
   thamos config --no-interactive
+}
+
+[[ ${THOTH_ADVISE} -ne 0 -o ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
+  echo ">>> Performing hardware and software discovery..."
+  thamos config --no-interactive || exit 1
+  echo ">>> Thoth's configuration file after hardware and software discovery:"
+  cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
 }
 
 [[ ${THOTH_CONFIG_CHECK} -ne 0 ]] && {
@@ -71,11 +80,6 @@ function restore_lock() {
       pip3 install --force-reinstall -U git+https://github.com/thoth-station/invectio || exit 1
   fi
 
-  echo ">>> Thoth s2i builder image version: ${THOTH_S2I_VERSION}"
-  echo ">>> Performing hardware and software discovery..."
-  thamos config --no-interactive || exit 1
-  echo ">>> Thoth's configuration file after hardware and software discovery:"
-  cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
   echo -e "\n>>> Asking Thoth for advise..."
   if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
     thamos advise || {
