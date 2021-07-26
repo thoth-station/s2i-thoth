@@ -56,7 +56,7 @@ echo ">>> Thoth s2i builder image version: ${THOTH_S2I_VERSION}"
   thamos config --no-interactive
 }
 
-[[ ${THOTH_ADVISE} -ne 0 -o ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
+[[ ${THOTH_ADVISE} -ne 0 || ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
   echo ">>> Performing hardware and software discovery..."
   thamos config --no-interactive || exit 1
   echo ">>> Thoth's configuration file after hardware and software discovery:"
