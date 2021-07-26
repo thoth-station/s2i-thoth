@@ -60,6 +60,16 @@ Building container images
 
 Container images are automatically built in quay.io when pushed to master branch.
 
+Building container images locally
+=================================
+
+If you wish to build container images locally, you can do so (an example for
+``ubi8-py39``):
+
+.. code-block:: console
+
+  podman build -f ubi8-py39/Dockerfile
+
 Updating and releasing new container images
 ===========================================
 
