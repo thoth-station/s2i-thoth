@@ -26,7 +26,7 @@ LABEL summary="$SUMMARY" \
 
 USER 0
 COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
-COPY ./requirements.txt /opt/app-root/src/requirements.txt
+COPY ./requirements.txt $HOME/requirements.txt
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
