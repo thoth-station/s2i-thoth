@@ -44,6 +44,6 @@ RUN TMPFILE=$(mktemp) && \
     fix-permissions ${APP_ROOT} -P && \
     yum update --assumeyes --setopt=tsflags=nodocs && \
     yum --assumeyes clean all && \
-    rm -rf /var/cache/yum
+    rm -rf /var/cache/dnf
 
 USER 1001
