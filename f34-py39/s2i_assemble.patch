@@ -1,9 +1,9 @@
---- a/assemble	2021-09-12 14:46:51.130401513 -0400
-+++ b/assemble	2021-09-12 14:49:27.881361622 -0400
+--- a/assemble    2021-09-12 14:46:51.130401513 -0400
++++ b/assemble    2021-09-12 14:49:27.881361622 -0400
 @@ -14,38 +14,8 @@
      python3.9 -m venv $1
  }
- 
+
 -# Install pipenv or micropipenv to the separate virtualenv to isolate it
 -# from system Python packages and packages in the main
 -# virtualenv. Executable is simlinked into ~/.local/bin
@@ -27,7 +27,7 @@
 -}
 -
  set -e
- 
+
 -# First of all, check that we don't have disallowed combination of ENVs
 -if [[ ! -z "$ENABLE_PIPENV" && ! -z "$ENABLE_MICROPIPENV" ]]; then
 -  echo "ERROR: Pipenv and micropipenv cannot be enabled at the same time!"
@@ -42,7 +42,7 @@
 @@ -53,50 +23,19 @@
  # set permissions for any installed artifacts
  fix-permissions /opt/app-root -P
- 
+
 -# We have to first upgrade pip to at least 19.3 because:
 -# * pip < 9 does not support different packages' versions for Python 2/3
 -# * pip < 19.3 does not support manylinux2014 wheels. Only manylinux2014 wheels
@@ -62,7 +62,7 @@
 +    pip install --no-cache-dir --disable-pip-version-check --isolated -U pip setuptools wheel
    fi
  fi
- 
+
 -if [[ ! -z "$ENABLE_PIPENV" ]]; then
 -  if [[ ! -z "$PIN_PIPENV_VERSION" ]]; then
 -    # Add == as a prefix to pipenv version, if defined
@@ -86,11 +86,11 @@
 -  pip install -r requirements.txt
 -fi
 +thamos install
- 
+
  if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
 -  pip install .
 +  pip install --no-cache-dir --disable-pip-version-check .
  fi
- 
+
  if should_collectstatic; then
