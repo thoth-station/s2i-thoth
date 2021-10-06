@@ -56,10 +56,10 @@
  if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
    echo "---> Upgrading pip to latest version ..."
 -  if ! pip install -U pip setuptools wheel; then
-+  if ! pip install --no-cache-dir -U pip setuptools wheel; then
++  if ! pip install --no-cache-dir --disable-pip-version-check -U pip setuptools wheel; then
      echo "WARNING: Installation of the latest pip,setuptools and wheel failed, trying again from official PyPI with pip --isolated install"
 -    pip install --isolated -U pip setuptools wheel
-+    pip install --no-cache-dir --isolated -U pip setuptools wheel
++    pip install --no-cache-dir --disable-pip-version-check --isolated -U pip setuptools wheel
    fi
  fi
  
@@ -90,7 +90,7 @@
  if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
 -  pip install .
-+  pip install --no-cache-dir .
++  pip install --no-cache-dir --disable-pip-version-check .
  fi
  
  if should_collectstatic; then
