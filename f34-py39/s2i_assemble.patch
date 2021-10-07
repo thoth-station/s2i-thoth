@@ -1,7 +1,7 @@
---- a/assemble    2020-10-31 11:55:38.000000000 +0100
-+++ b/assemble    2020-11-25 22:32:16.739312082 +0100
-@@ -18,38 +18,8 @@
-   fi
+--- a/assemble    2021-09-12 14:46:51.130401513 -0400
++++ b/assemble    2021-09-12 14:49:27.881361622 -0400
+@@ -14,38 +14,8 @@
+     python3.9 -m venv $1
  }
 
 -# Install pipenv or micropipenv to the separate virtualenv to isolate it
@@ -39,7 +39,7 @@
  shopt -s dotglob
  echo "---> Installing application source ..."
  mv /tmp/src/* "$HOME"
-@@ -57,16 +27,6 @@
+@@ -53,50 +23,19 @@
  # set permissions for any installed artifacts
  fix-permissions /opt/app-root -P
 
@@ -55,8 +55,11 @@
 -
  if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
    echo "---> Upgrading pip to latest version ..."
-   if ! pip install -U pip setuptools wheel; then
-@@ -75,28 +35,7 @@
+-  if ! pip install -U pip setuptools wheel; then
++  if ! pip install --no-cache-dir --disable-pip-version-check -U pip setuptools wheel; then
+     echo "WARNING: Installation of the latest pip,setuptools and wheel failed, trying again from official PyPI with pip --isolated install"
+-    pip install --isolated -U pip setuptools wheel
++    pip install --no-cache-dir --disable-pip-version-check --isolated -U pip setuptools wheel
    fi
  fi
 
@@ -86,3 +89,8 @@
 
  if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
+-  pip install .
++  pip install --no-cache-dir --disable-pip-version-check .
+ fi
+
+ if should_collectstatic; then
