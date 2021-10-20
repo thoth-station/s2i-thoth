@@ -1,10 +1,10 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.access.redhat.com/ubi8/python-39:1-18
+FROM registry.access.redhat.com/ubi8/python-39@sha256:2e4f51465c528801bde82aec6d7452fca50460cb40bf45204660e897b3369e51
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-ubi8-py39 \
-    THOTH_S2I_VERSION=0.32.0 \
+    THOTH_S2I_VERSION=0.32.1 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1 \
     MICROPIPENV_NO_LOCKFILE_PRINT=0 \
