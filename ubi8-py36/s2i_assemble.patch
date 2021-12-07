@@ -1,5 +1,5 @@
---- a/assemble    2020-10-31 11:55:38.000000000 +0100
-+++ b/assemble    2020-11-25 22:32:16.739312082 +0100
+--- a/assemble	2021-12-07 00:04:23.680648366 -0500
++++ b/assemble	2021-12-07 00:04:15.508632870 -0500
 @@ -18,38 +18,8 @@
    fi
  }
@@ -39,24 +39,7 @@
  shopt -s dotglob
  echo "---> Installing application source ..."
  mv /tmp/src/* "$HOME"
-@@ -57,16 +27,6 @@
- # set permissions for any installed artifacts
- fix-permissions /opt/app-root -P
-
--# We have to first upgrade pip to at least 19.3 because:
--# * pip < 9 does not support different packages' versions for Python 2/3
--# * pip < 19.3 does not support manylinux2014 wheels. Only manylinux2014 wheels
--#   support platforms like ppc64le, aarch64 or armv7
--echo "---> Upgrading pip to version 19.3.1 ..."
--if ! pip install -U "pip==19.3.1"; then
--  echo "WARNING: Installation of 'pip==19.3.1' failed, trying again from official PyPI with pip --isolated install"
--  pip install --isolated -U "pip==19.3.1"
--fi
--
- if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
-   echo "---> Upgrading pip to latest version ..."
-   if ! pip install -U pip setuptools wheel; then
-@@ -75,28 +35,7 @@
+@@ -66,28 +36,7 @@
    fi
  fi
 
@@ -84,5 +67,5 @@
 -fi
 +thamos install
 
- if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
+ if [[ ( -f setup.py || -f setup.cfg ) && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
