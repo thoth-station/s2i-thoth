@@ -70,6 +70,17 @@ If you wish to build container images locally, you can do so (an example for
 
   podman build -f ubi8-py39/Dockerfile
 
+Updating the dependencies
+=========================
+
+This script can be used for updating the requirements for each of the environments.
+
+Execute command: `./update-requirements.sh <sub-directories>`
+
+Example: `./update-requirements.sh ubi8-py39 f34-py39`
+
+Prerequisite: Pipenv, micropipenv and different Python interpreter versions
+
 Updating and releasing new container images
 ===========================================
 
