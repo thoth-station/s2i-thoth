@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script can be used for updating the requirements for each of the environments.
 # Execute command: `./update-requirements.sh <sub-directories>`
