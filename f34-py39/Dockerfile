@@ -25,6 +25,7 @@ LABEL summary="$SUMMARY" \
     maintainer="Thoth Station <aicoe-thoth@redhat.com>"
 
 USER 0
+RUN sudo dnf install python3.8 -y
 COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
 COPY ./requirements.txt $HOME/requirements.txt
 RUN TMPFILE=$(mktemp) && \
