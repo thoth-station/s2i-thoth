@@ -1,5 +1,5 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.access.redhat.com/ubi8/python-36:1-170.1647529266
+FROM registry.access.redhat.com/ubi8/python-36:1-170.1648121369
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
