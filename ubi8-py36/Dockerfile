@@ -30,8 +30,6 @@ COPY ./requirements.txt $HOME/requirements.txt
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
-    pip3 install -U "pip==20.3.3" && \
-    /usr/bin/pip3 install -U "pip==20.3.3" && \
     curl https://raw.githubusercontent.com/thoth-station/micropipenv/master/micropipenv.py | MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 /usr/bin/python3 - install -- && \
     curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
