@@ -1,5 +1,5 @@
---- a/assemble    2021-09-12 14:46:51.130401513 -0400
-+++ b/assemble    2021-09-12 14:49:27.881361622 -0400
+--- a/assemble    2022-07-11 23:18:52.242312969 -0400
++++ b/assemble    2022-07-11 23:27:21.986300732 -0400
 @@ -14,38 +14,8 @@
      python3.9 -m venv $1
  }
@@ -39,25 +39,13 @@
  shopt -s dotglob
  echo "---> Installing application source ..."
  mv /tmp/src/* "$HOME"
-@@ -53,50 +23,19 @@
- # set permissions for any installed artifacts
- fix-permissions /opt/app-root -P
+@@ -56,38 +26,17 @@
 
--# We have to first upgrade pip to at least 19.3 because:
--# * pip < 9 does not support different packages' versions for Python 2/3
--# * pip < 19.3 does not support manylinux2014 wheels. Only manylinux2014 wheels
--#   support platforms like ppc64le, aarch64 or armv7
--echo "---> Upgrading pip to version 19.3.1 ..."
--if ! pip install -U "pip==19.3.1"; then
--  echo "WARNING: Installation of 'pip==19.3.1' failed, trying again from official PyPI with pip --isolated install"
--  pip install --isolated -U "pip==19.3.1"
--fi
--
  if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
-   echo "---> Upgrading pip to latest version ..."
+   echo "---> Upgrading pip, setuptools and wheel to latest version ..."
 -  if ! pip install -U pip setuptools wheel; then
 +  if ! pip install --no-cache-dir --disable-pip-version-check -U pip setuptools wheel; then
-     echo "WARNING: Installation of the latest pip,setuptools and wheel failed, trying again from official PyPI with pip --isolated install"
+     echo "WARNING: Installation of the latest pip, setuptools and wheel failed, trying again from official PyPI with pip --isolated install"
 -    pip install --isolated -U pip setuptools wheel
 +    pip install --no-cache-dir --disable-pip-version-check --isolated -U pip setuptools wheel
    fi
@@ -87,7 +75,7 @@
 -fi
 +thamos install
 
- if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
+ if [[ ( -f setup.py || -f setup.cfg ) && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
 -  pip install .
 +  pip install --no-cache-dir --disable-pip-version-check .

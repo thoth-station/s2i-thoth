@@ -1,10 +1,10 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.fedoraproject.org/f34/python3:0-31.container
+FROM registry.fedoraproject.org/f34/python3:0-34.container
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 34. It includes Pipenv." \
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-f34-py39 \
-    THOTH_S2I_VERSION=0.33.0 \
+    THOTH_S2I_VERSION=0.34.0 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1 \
     MICROPIPENV_NO_LOCKFILE_PRINT=0 \
