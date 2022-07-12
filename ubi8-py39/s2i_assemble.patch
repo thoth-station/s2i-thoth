@@ -1,5 +1,5 @@
---- a/assemble    2021-12-07 00:00:27.196199956 -0500
-+++ b/assemble    2021-12-07 00:00:32.284209605 -0500
+--- a/assemble    2022-07-11 23:39:23.289792884 -0400
++++ b/assemble    2022-07-11 23:42:20.941415988 -0400
 @@ -14,38 +14,8 @@
      python3.9 -m venv $1
  }
@@ -67,5 +67,5 @@
 -fi
 +thamos install
 
- if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
+ if [[ ( -f setup.py || -f setup.cfg ) && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
