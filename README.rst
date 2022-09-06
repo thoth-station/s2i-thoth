@@ -25,7 +25,7 @@ Experimental Thoth container images:
 
 Artifacts needed to build `s2i-thoth-*` container images.
 
-These container images are complaint with OpenShift's s2i build process to
+These container images are compliant with OpenShift's s2i build process to
 build Python applications. They extend the functionality of base s2i Python
 container images so that applications using these container images benefit from
 Thoth's recommendations.
