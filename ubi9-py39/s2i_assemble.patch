@@ -1,5 +1,5 @@
---- a/assemble	2022-08-02 09:47:03.000000000 -0700
-+++ b/assemble	2022-08-02 10:05:42.000000000 -0700
+--- a/assemble    2022-08-02 09:47:03.000000000 -0700
++++ b/assemble    2022-08-02 10:05:42.000000000 -0700
 @@ -1,4 +1,145 @@
  #!/bin/bash
 +#!/usr/bin/env bash
@@ -143,13 +143,13 @@
 +#
 +# ------------------------>% Thoth related content %<------------------------
 +#
- 
+
  function is_django_installed() {
    python -c "import django" &>/dev/null
 @@ -14,38 +155,8 @@
      python3.9 -m venv $1
  }
- 
+
 -# Install pipenv or micropipenv to the separate virtualenv to isolate it
 -# from system Python packages and packages in the main
 -# virtualenv. Executable is simlinked into ~/.local/bin
@@ -173,7 +173,7 @@
 -}
 -
  set -e
- 
+
 -# First of all, check that we don't have disallowed combination of ENVs
 -if [[ ! -z "$ENABLE_PIPENV" && ! -z "$ENABLE_MICROPIPENV" ]]; then
 -  echo "ERROR: Pipenv and micropipenv cannot be enabled at the same time!"
@@ -188,7 +188,7 @@
 @@ -62,30 +173,9 @@
    fi
  fi
- 
+
 -if [[ ! -z "$ENABLE_PIPENV" ]]; then
 -  if [[ ! -z "$PIN_PIPENV_VERSION" ]]; then
 -    # Add == as a prefix to pipenv version, if defined
@@ -212,7 +212,7 @@
 -  pip install -r requirements.txt
 -fi
 +thamos install
- 
+
 -if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
 +if [[ ( -f setup.py || -f setup.cfg ) && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
    echo "---> Installing application ..."
