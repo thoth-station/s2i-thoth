@@ -47,5 +47,3 @@ RUN TMPFILE=$(mktemp) && \
     rm -rf /var/cache/dnf
 
 USER 1001
-
-run
