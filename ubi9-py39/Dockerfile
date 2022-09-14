@@ -4,7 +4,7 @@ FROM registry.access.redhat.com/ubi9/python-39@sha256:6329d5779e89630928d5fa65a7
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI9. It includes pipenv." \
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-ubi9-py39 \
-    THOTH_S2I_VERSION=0.34.1 \
+    THOTH_S2I_VERSION=0.35.0 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1 \
     MICROPIPENV_NO_LOCKFILE_PRINT=0 \
