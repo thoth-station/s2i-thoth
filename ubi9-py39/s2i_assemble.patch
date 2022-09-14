@@ -1,0 +1,220 @@
+--- a/assemble    2022-08-02 09:47:03.000000000 -0700
++++ b/assemble    2022-08-02 10:05:42.000000000 -0700
+@@ -1,4 +1,145 @@
+ #!/bin/bash
++#!/usr/bin/env bash
++#
++# ------------------------>% Thoth related content %<------------------------
++#
++THOTH_ASSEMBLE_DEBUG=${THOTH_ASSEMBLE_DEBUG:-0}
++[[ ${THOTH_ASSEMBLE_DEBUG} -eq 0 ]] || set -e
++
++# Submit stack to Thoth, but do not use the recommended one:
++THOTH_DRY_RUN=${THOTH_DRY_RUN:-0}
++# Force advises even if the lock is present in the repo:
++THOTH_ADVISE=${THOTH_ADVISE:-1}
++# Trigger Thoth configuration file check:
++THOTH_CONFIG_CHECK=${THOTH_CONFIG_CHECK:-1}
++# Use provenance checks by default if THOTH_ADVISE is set to 0.
++THOTH_PROVENANCE_CHECK=${THOTH_PROVENANCE_CHECK:-1}
++# Use Thamos from git instead of a PyPI release:
++THOTH_FROM_MASTER=${THOTH_FROM_MASTER:-0}
++# Generate .thoth.yaml file during the build process.
++THOTH_FORCE_GENERATE_CONFIG=${THOTH_FORCE_GENERATE_CONFIG:-0}
++# Thoth host to submit recommendations to:
++export THOTH_HOST=${THOTH_HOST:-khemenu.thoth-station.ninja}
++# Disable progressbar for thamos:
++export THAMOS_NO_PROGRESSBAR=${THAMOS_NO_PROGRESSBAR:-1}
++# Fallback to the lock file present in the repo if analysis fails.
++THOTH_ERROR_FALLBACK=${THOTH_ERROR_FALLBACK:-0}
++# Turn off Thoth using just one flag, only config generation is enabled.
++THOTH_OFF=${THOTH_OFF:-0}
++
++[[ ${THOTH_OFF} -ne 0 ]] && {
++  echo ">>> Disabling Thoth"
++  THOTH_ADVISE=0
++  THOTH_PROVENANCE_CHECK=0
++  THOTH_CONFIG_CHECK=0
++  THOTH_DRY_RUN=1
++}
++
++# Print Thoth configuration to logs if debug is enabled.
++[[ ${THOTH_ASSEMBLE_DEBUG} -eq 0 ]] || env | grep -e '^THOTH_' -e '^THAMOS_'
++
++# A directory where s2i places sources.
++pushd /tmp/src
++
++# Make a backup of the lock present in the git root.
++[[ ${THOTH_DRY_RUN} -ne 0 && -f Pipfile.lock ]] && cp Pipfile.lock ../
++[[ ${THOTH_DRY_RUN} -ne 0 && -f requirements.txt ]] && cp requirements.txt ../
++
++function restore_lock() {
++  [[ -f ../Pipfile.lock ]] && cp ../Pipfile.lock .
++  [[ -f ../requirements.txt ]] && cp ../requirements.txt .
++}
++
++echo ">>> Thoth s2i builder image version: ${THOTH_S2I_VERSION}"
++
++[[ ${THOTH_FORCE_GENERATE_CONFIG} -ne 0 ]] && {
++  rm -f .thoth.yaml
++  thamos config --no-interactive
++}
++
++[[ ${THOTH_ADVISE} -ne 0 || ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
++  echo ">>> Performing hardware and software discovery..."
++  thamos config --no-interactive || exit 1
++  echo ">>> Thoth's configuration file after hardware and software discovery:"
++  cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
++}
++
++[[ ${THOTH_CONFIG_CHECK} -ne 0 ]] && {
++  thamos check || {
++    if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
++      echo ">>> Check of the configuration file failed, proceeding with the installation process based on the error fallback flag"
++    else
++      echo ">>> Aborting build as Thoth's configuration check failed; you can suppress the failure by providing THOTH_ERROR_FALLBACK=1" >&2
++      exit 1
++    fi
++  }
++}
++
++[[ ${THOTH_ADVISE} -ne 0 ]] && {
++  if [[ ${THOTH_FROM_MASTER} -eq 1 ]]; then
++      pip3 install --force-reinstall -U git+https://github.com/thoth-station/thamos || exit 1
++      pip3 install --force-reinstall -U git+https://github.com/thoth-station/invectio || exit 1
++  fi
++
++  echo -e "\n>>> Asking Thoth for advise..."
++  if [[ ${THOTH_DRY_RUN} -eq 0 ]]; then
++    thamos advise || {
++      if [[ ${THOTH_ERROR_FALLBACK} -ne 0 ]]; then
++        echo ">>> Thoth stack analysis failed with the following log:"
++        thamos log
++        echo ">>> Restoring previous requirements lock"
++        restore_lock
++      else
++        if [[ -f ".thoth_last_analysis_id" ]]; then
++          echo ">>> Thoth stack analysis failed with the following log:"
++          thamos log
++        fi
++
++        echo ">>> Thoth stack analysis failed, this build will fail shortly; you can suppress this failure by providing THOTH_ERROR_FALLBACK=1" >&2
++        exit 1
++      fi
++    }
++  else
++    thamos advise --no-wait || {
++      [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
++    }
++  fi
++} || {
++  echo ">>> Thoth advises are not activated"
++}
++
++# Restore previous lock, do not use the original one on dry run.
++[[ ${THOTH_DRY_RUN} -ne 0 ]] && {
++  echo ">>> Restoring previous requirements lock as THOTH_DRY_RUN was set" >&2
++  restore_lock
++}
++
++# Show lock on debug.
++[[ ${THOTH_ASSEMBLE_DEBUG} -ne 0 && -f Pipfile.lock ]] && cat Pipfile.lock
++[[ ${THOTH_ASSEMBLE_DEBUG} -ne 0 && -f requirements.txt ]] && cat requirements.txt
++
++[[ ${THOTH_PROVENANCE_CHECK} -ne 0 ]] && {
++  if [[ ${THOTH_ADVISE} -eq 0 && ${THOTH_DRY_RUN} -eq 0 ]]; then
++    echo ">>> Expanding Thoth's configuration file..."
++    thamos config --no-interactive || exit 1
++    echo ">>> Thoth's configuration file after expansion:"
++    cat .thoth.yaml | /usr/bin/python3 -c "import yaml; import json; import sys; json.dump(yaml.safe_load(sys.stdin), sys.stdout, indent=2);"
++    echo -e "\n>>> Asking Thoth for provenance check..."
++    thamos provenance-check || {
++      [[ ${THOTH_ERROR_FALLBACK} -eq 0 ]] && exit 1
++    }
++  else
++    echo ">>> Provenance checks skipped as the lock file used is from Thoth"
++  fi
++}
++
++popd
++
++# Uncomment if you want to use this script solely in an s2i as an extension:
++#exec /usr/libexec/s2i/assemble
++#
++# ------------------------>% Thoth related content %<------------------------
++#
+
+ function is_django_installed() {
+   python -c "import django" &>/dev/null
+@@ -14,38 +155,8 @@
+     python3.9 -m venv $1
+ }
+
+-# Install pipenv or micropipenv to the separate virtualenv to isolate it
+-# from system Python packages and packages in the main
+-# virtualenv. Executable is simlinked into ~/.local/bin
+-# to be accessible. This approach is inspired by pipsi
+-# (pip script installer).
+-function install_tool() {
+-  echo "---> Installing $1 packaging tool ..."
+-  VENV_DIR=$HOME/.local/venvs/$1
+-  virtualenv_bin "$VENV_DIR"
+-  # First, try to install the tool without --isolated which means that if you
+-  # have your own PyPI mirror, it will take it from there. If this try fails, try it
+-  # again with --isolated which ignores external pip settings (env vars, config file)
+-  # and installs the tool from PyPI (needs internet connetion).
+-  # $1$2 combines package name with [extras] or version specifier if is defined as $2```
+-  if ! $VENV_DIR/bin/pip install -U $1$2; then
+-    echo "WARNING: Installation of $1 failed, trying again from official PyPI with pip --isolated install"
+-    $VENV_DIR/bin/pip install --isolated -U $1$2  # Combines package name with [extras] or version specifier if is defined as $2```
+-  fi
+-  mkdir -p $HOME/.local/bin
+-  ln -s $VENV_DIR/bin/$1 $HOME/.local/bin/$1
+-}
+-
+ set -e
+
+-# First of all, check that we don't have disallowed combination of ENVs
+-if [[ ! -z "$ENABLE_PIPENV" && ! -z "$ENABLE_MICROPIPENV" ]]; then
+-  echo "ERROR: Pipenv and micropipenv cannot be enabled at the same time!"
+-  # podman/buildah does not relay this exit code but it will be fixed hopefuly
+-  # https://github.com/containers/buildah/issues/2305
+-  exit 3
+-fi
+-
+ shopt -s dotglob
+ echo "---> Installing application source ..."
+ mv /tmp/src/* "$HOME"
+@@ -62,30 +173,9 @@
+   fi
+ fi
+
+-if [[ ! -z "$ENABLE_PIPENV" ]]; then
+-  if [[ ! -z "$PIN_PIPENV_VERSION" ]]; then
+-    # Add == as a prefix to pipenv version, if defined
+-    PIN_PIPENV_VERSION="==$PIN_PIPENV_VERSION"
+-  fi
+-  install_tool "pipenv" "$PIN_PIPENV_VERSION"
+-  echo "---> Installing dependencies via pipenv ..."
+-  if [[ -f Pipfile ]]; then
+-    pipenv install --deploy
+-  elif [[ -f requirements.txt ]]; then
+-    pipenv install -r requirements.txt
+-  fi
+-  # pipenv check
+-elif [[ ! -z "$ENABLE_MICROPIPENV" ]]; then
+-  install_tool "micropipenv" "[toml]"
+-  echo "---> Installing dependencies via micropipenv ..."
+-  # micropipenv detects Pipfile.lock and requirements.txt in this order
+-  micropipenv install --deploy
+-elif [[ -f requirements.txt ]]; then
+-  echo "---> Installing dependencies ..."
+-  pip install -r requirements.txt
+-fi
++thamos install
+
+-if [[ -f setup.py && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
++if [[ ( -f setup.py || -f setup.cfg ) && -z "$DISABLE_SETUP_PY_PROCESSING" ]]; then
+   echo "---> Installing application ..."
+   pip install .
+ fi

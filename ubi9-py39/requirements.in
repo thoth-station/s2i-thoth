@@ -1,0 +1,3 @@
+thamos
+micropipenv[toml]
+requests==2.25.1
