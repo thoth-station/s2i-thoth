@@ -11,17 +11,28 @@ s2i-thoth
 
 .. |s2i-thoth-f35-py310 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-f35-py310/status
 
+.. |s2i-thoth-ubi9-py39 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi9-py39/status
+
 Experimental Thoth container images:
 
-* `quay.io/thoth-station/s2i-thoth-ubi8-py39 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py39>`_ |s2i-thoth-ubi8-py39 on Quay|
+.. list-table:: s2i Thoth Images
+   :widths: 40 30
+   :header-rows: 1
 
-* `quay.io/thoth-station/s2i-thoth-ubi8-py38 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38>`_ |s2i-thoth-ubi8-py38 on Quay|
-
-* `quay.io/thoth-station/s2i-thoth-ubi8-py36 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36>`_ |s2i-thoth-ubi8-py36 on Quay|
-
-* `quay.io/thoth-station/s2i-thoth-f34-py39 <https://quay.io/repository/thoth-station/s2i-thoth-f34-py39>`_ |s2i-thoth-f34-py39 on Quay|
-
-* `quay.io/thoth-station/s2i-thoth-f35-py310 <https://quay.io/repository/thoth-station/s2i-thoth-f35-py310>`_ |s2i-thoth-f35-py310 on Quay|
+   * - Image
+     - Status
+   * - `s2i-thoth-ubi8-py39 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py39>`_
+     - |s2i-thoth-ubi8-py39 on Quay|
+   * - `s2i-thoth-ubi8-py38 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38>`_
+     - |s2i-thoth-ubi8-py38 on Quay|
+   * - `s2i-thoth-ubi8-py36 <https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py36>`_
+     - |s2i-thoth-ubi8-py38 on Quay|
+   * - `s2i-thoth-f34-py39 <https://quay.io/repository/thoth-station/s2i-thoth-f34-py39>`_
+     - |s2i-thoth-f34-py39 on Quay|
+   * - `s2i-thoth-f35-py310 <https://quay.io/repository/thoth-station/s2i-thoth-f35-py310>`_
+     - |s2i-thoth-f35-py310 on Quay|
+   * - `s2i-thoth-ubi9-py39 <https://quay.io/repository/thoth-station/s2i-thoth-ubi9-py39>`_
+     - |s2i-thoth-ubi9-py39 on Quay|
 
 Artifacts needed to build `s2i-thoth-*` container images.
 
@@ -105,10 +116,11 @@ S2I Assemble Patches
 
 Most of the work when releasing a new container image comes from updating the ``s2i_assemble.patch`` file.
 This file dictates how to change the base image's s2i assemble script, usually available at ``/usr/libexec/s2i/assemble`` of a container running the base image, to provide the new image with everything it may need.
-As with any patch file, the ``s2i_assemble.patch`` can be generated manaually, however this is not recommend.  The recommended methodology to create one is as follows:
+As with any patch file, the ``s2i_assemble.patch`` can be generated manually, however this is not recommended.  The recommended methodology to create one is as follows:
 
 1. create directories ``a`` and ``b`` in the root of the `s2i-thoth` repo.
 2. find the ``assemble`` script of your base image.
+
   - This starts by finding the base image. For instance, fedora base images are available at ``registry.fedoraproject.org/``
   - Either:
 
@@ -122,9 +134,11 @@ As with any patch file, the ``s2i_assemble.patch`` can be generated manaually, h
         RUN cat /usr/libexec/s2i/assemble
 
 3. Construct a new s2i ``assemble`` script in ``b/assemble``. This should reflect what you want the final patched s2i assemble script to be.
+
   - For reference on what your final assemble script should look like refer to any image overlay in this repository. Find its base image s2i assemble script as described above, and patch it with the ``s2i_assemble.patch`` in the corresponding directory, ex: ``patch a/assemble -i <OVERLAY_NAME>/s2i_assemble.patch``. If this succeeds it will modify the base ``assemble`` script with your patch, and can serve as an example of what your final s2i assemble script should look like.
   - NOTE: this may vary a lot by image, so thinnk about what the image chooses to include and remove rather than attempting to replicate it exactly for another overlay.
-4. Run a diff between ``a/assemble`` and ``b/assemble``, and the output should become your ``s2i_assemble.patch``. Make sure to place it in the correct overlay. Example: ``diff a/assemble b/assemble > <OVERLAY_NAME>/s2i_assemble.patch``.
+
+4. Run a diff between ``a/assemble`` and ``b/assemble``, and the output should become your ``s2i_assemble.patch``. Make sure to place it in the correct overlay. Example: ``diff -u a/assemble b/assemble > <OVERLAY_NAME>/s2i_assemble.patch``.
 5. Verify that your image builds correctly. Navigate to your overlay directory with the new ``Dockerfile``, ``requirements.in``, ``requirements.txt``, and ``s2i_assemble.patch`` that you just generated. Run ``podman build .`` in the new overlay to verify that the image is buildable.
 
 Importing image into OpenShift's registry
