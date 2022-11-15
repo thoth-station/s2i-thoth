@@ -1,10 +1,10 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.access.redhat.com/ubi8/python-36:1-184
+FROM registry.access.redhat.com/ubi8/python-36@sha256:d681eb696f601759cd37ef39fca0e9fec5664f6806c75aae65382b9fd68936ae
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Red Hat UBI8. It includes pipenv." \
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-ubi8-py36 \
-    THOTH_S2I_VERSION=0.34.1 \
+    THOTH_S2I_VERSION=0.35.1 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1 \
     MICROPIPENV_NO_LOCKFILE_PRINT=0 \
@@ -15,9 +15,9 @@ LABEL summary="$SUMMARY" \
     io.k8s.description="$DESCRIPTION" \
     io.k8s.display-name="Thoth Python 3.6-ubi8 S2I" \
     io.openshift.expose-services="8080:http" \
-    io.openshift.tags="python,python36" \
+    io.openshift.tags="python,python36,python36:1-197.1666661057" \
     name="$THOTH_S2I_NAME:v$THOTH_S2I_VERSION" \
-    vendor="AICoE at the Office of the CTO, Red Hat Inc." \
+    vendor="Project Thoth, Red Hat Inc." \
     authoritative-source-url="https://quay.io/thoth-station/s2i-thoth" \
     version="$THOTH_S2I_VERSION" \
     release="0" \

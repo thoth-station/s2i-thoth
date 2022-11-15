@@ -1,10 +1,10 @@
 # Thoth's extension to OpenShift's S2I build
-FROM registry.fedoraproject.org/f35/python3:0-41.container
+FROM quay.io/fedora/python-310@sha256:ea54c8e19b91073a11a594ab6a7368bea199bcf8cdc0a164e1111eeb82dd0de6
 
 ENV SUMMARY="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications" \
     DESCRIPTION="Thoth's Source-to-Image for Python ${PYTHON_VERSION} applications. This toolchain is based on Fedora 35. It includes Pipenv." \
     THOTH_S2I_NAME=quay.io/thoth-station/s2i-thoth-f35-py310 \
-    THOTH_S2I_VERSION=0.34.1 \
+    THOTH_S2I_VERSION=0.35.1 \
     THAMOS_NO_PROGRESSBAR=1 \
     THAMOS_NO_EMOJI=1 \
     MICROPIPENV_NO_LOCKFILE_PRINT=0 \
@@ -17,7 +17,7 @@ LABEL summary="$SUMMARY" \
     io.openshift.expose-services="8080:http" \
     io.openshift.tags="python,python310" \
     name="$THOTH_S2I_NAME:v$THOTH_S2I_VERSION" \
-    vendor="AICoE at the Office of the CTO, Red Hat Inc." \
+    vendor="Project Thoth, Red Hat Inc." \
     authoritative-source-url="https://quay.io/thoth-station/s2i-thoth" \
     version="$THOTH_S2I_VERSION" \
     release="0" \
