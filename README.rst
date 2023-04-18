@@ -1,6 +1,12 @@
 s2i-thoth
 ---------
 
+
+  **HIBERNATION NOTICE**: The Project is currently hibernating. If you are interested
+  in contributing to is, or if you have urgent issues that need to be fixed, please
+  reach out to the Thoth team via `an support issue <https://github.com/thoth-station/support/issues/new/choose>`_.
+
+
 .. |s2i-thoth-ubi8-py39 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py39/status
 
 .. |s2i-thoth-ubi8-py38 on Quay| image:: https://quay.io/repository/thoth-station/s2i-thoth-ubi8-py38/status
