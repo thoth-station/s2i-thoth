@@ -499,9 +499,9 @@ pyasn1-modules==0.2.8 \
 pyelftools==0.29 \
     --hash=sha256:519f38cf412f073b2d7393aa4682b0190fa901f7c3fa0bff2b82d537690c7fc1 \
     --hash=sha256:ec761596aafa16e282a31de188737e5485552469ac63b60cfcccf22263fd24ff
-pygments==2.13.0 \
-    --hash=sha256:56a8508ae95f98e2b9bdf93a6be5ae3f7d8af858b43e02c5a2ff083726be40c1 \
-    --hash=sha256:f643f331ab57ba3c9d89212ee4a2dabc6e94f117cf4eefde99a0574720d14c42
+pygments==2.15.0 \
+    --hash=sha256:77a3299119af881904cd5ecd1ac6a66214b6e9bed1f2db16993b54adede64094 \
+    --hash=sha256:f7e36cffc4c517fbc252861b9a6e4644ca0e5abadf9a113c72d1358ad09b9500
 pyparsing==3.0.9 \
     --hash=sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb \
     --hash=sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc
